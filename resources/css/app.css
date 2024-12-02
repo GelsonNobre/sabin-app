@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Table pagination: active page highlight */
+.mary-table-pagination span[aria-current="page"]>span {
+    @apply bg-primary text-base-100
+}
+
+/* Table pagination: for dark mode*/
+.mary-table-pagination span[aria-disabled="true"] span {
+    @apply bg-inherit
+}
+
+/* Table pagination: for dark mode */
+.mary-table-pagination button {
+    @apply bg-base-100
+}
+
+.form-row-2 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2;
+}
+
+.form-row-3 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-3;
+}
+
+.form-row-4 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-4;
+}
+
+.form-row-5 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-5;
+}
+
+.form-row-6 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-6;
+}
+
+.form-row-7 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-7;
+}
+
+.form-row-8 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-8;
+}
+
+.form-row-9 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-9;
+}
+
+.form-row-10 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-10;
+}
+
+.form-row-11 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-11;
+}
+
+.form-row-12 {
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-12;
+}
+
+.form-col-1 {
+    @apply flex flex-col gap-1.5;
+}
+
+.form-col-2 {
+    @apply flex flex-col gap-1.5 sm:col-span-2;
+}
+
+.form-col-3 {
+    @apply flex flex-col gap-1.5 sm:col-span-3;
+}
+
+.form-col-4 {
+    @apply flex flex-col gap-1.5 sm:col-span-4;
+}
+
+.form-col-5 {
+    @apply flex flex-col gap-1.5 sm:col-span-5;
+}
+
+.form-col-6 {
+    @apply flex flex-col gap-1.5 sm:col-span-6;
+}
+
+.form-col-7 {
+    @apply flex flex-col gap-1.5 sm:col-span-7;
+}
+
+.form-col-8 {
+    @apply flex flex-col gap-1.5 sm:col-span-8;
+}
+
+.form-col-9 {
+    @apply flex flex-col gap-1.5 sm:col-span-9;
+}
+
+.form-col-10 {
+    @apply flex flex-col gap-1.5 sm:col-span-10;
+}
+
+.form-col-11 {
+    @apply flex flex-col gap-1.5 sm:col-span-11;
+}
+
+.form-col-12 {
+    @apply flex flex-col gap-1.5 sm:col-span-12;
+}
