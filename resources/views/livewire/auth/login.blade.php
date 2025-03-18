@@ -1,6 +1,6 @@
 <x-card title="Entrar" shadow class="mx-auto w-[350px]" separator progress-indicator>
     <x-slot:figure class="mt-4">
-        <img src="{{asset('images/logo-red.svg')}}" class="h-16" alt="appmake"/>
+        <img src="{{asset('images/app-logo-red.jpg')}}" class="h-40" alt="appmake"/>
     </x-slot:figure>
     @if($errors->hasAny(['invalidCredentials', 'rateLimiter']))
         <x-alert icon="o-exclamation-triangle" class="alert-warning mb-4">

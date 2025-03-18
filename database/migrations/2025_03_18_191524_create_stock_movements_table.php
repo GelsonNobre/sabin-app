@@ -4,18 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('stock_movements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
-            $table->string('description');
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
+            $table->foreignId('medication_id')->constrained()->onDelete('cascade');
+            $table->integer('quantity');
+            $table->enum('type', ['entrada', 'saída']);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('stock_movements');
     }
 };
