@@ -33,7 +33,12 @@ class Index extends Component
     #[Computed]
     public function medications(): LengthAwarePaginator
     {
+        // return Medication::query()
+        //     ->where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($this->search) . '%')
+        //     ->orderBy(...array_values($this->sortBy))
+        //     ->paginate($this->perPage);
         return Medication::query()
+            ->withSum('stockMovements as stock_quantity', 'quantity')
             ->where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($this->search) . '%')
             ->orderBy(...array_values($this->sortBy))
             ->paginate($this->perPage);
@@ -51,7 +56,7 @@ class Index extends Component
             ['key' => 'name', 'label' => 'Nome'],
             ['key' => 'producer', 'label' => 'Fabricante'],
             ['key' => 'age_type', 'label' => 'Faixa etária'],
-            ['key' => 'age_type', 'label' => 'Aqui é pra ser Estoque'],
+            ['key' => 'stock_quantity', 'label' => 'Aqui é pra ser Estoque'],
         ];
     }
 

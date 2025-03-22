@@ -15,10 +15,16 @@ class Medication extends Model
         'age_type',
     ];
 
-    public function stockMovement(): HasMany
+    public function stockMovements(): HasMany
     {
         return $this->hasMany(StockMovement::class);
     }
+
+    public function getStockQuantityAttribute()
+    {
+        return $this->stockMovements()->sum('quantity');
+    }
+
 
     public function producer()
     {
