@@ -6,15 +6,18 @@ use Livewire\Component;
 use App\Models\Medication;
 use Livewire\Attributes\On;
 use Mary\Traits\Toast;
+use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Foundation\Application;
 
 class Delete extends Component
 {
     use Toast;
-    public Medication $medication;
+    public ?Medication $medication;
 
     public bool $modal = false;
 
-    public function render()
+    public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    
 
     {
         return view('livewire.medication.delete');
