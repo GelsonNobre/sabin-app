@@ -17,29 +17,35 @@ class DatabaseSeeder extends Seeder
     {
         User::factory()->create([
             'name'     => 'Suporte',
-            'email'    => 'suporte@appmake.com.br',
+            'email'    => 'suporte@barezzi.com.br',
             'password' => Hash::make('12345678'),
         ]);
         User::factory()->create([
             'name'     => 'Administrador',
-            'email'    => 'admin@appmake.com.br',
+            'email'    => 'admin@barezzi.com.br',
             'password' => Hash::make('12345678'),
         ]);
         User::factory()->create([
-            'name'     => 'Usuário',
-            'email'    => 'atendente@appmake.com.br',
-            'password' => Hash::make('12345678'),
-        ]);
-
-        User::factory()->create([
-            'name'     => 'Profissional 1',
-            'email'    => 'profissional1@appmake.com.br',
+            'name'     => 'Lucas Junio',
+            'email'    => 'lucas@barezzi.com.br',
             'password' => Hash::make('12345678'),
         ]);
 
         User::factory()->create([
-            'name'     => 'Profissional 2',
-            'email'    => 'profissional2@appmake.com.br',
+            'name'     => 'Adriana Silva',
+            'email'    => 'adriana@barezzi.com.br',
+            'password' => Hash::make('12345678'),
+        ]);
+
+        User::factory()->create([
+            'name'     => 'David Wesley',
+            'email'    => 'david@barezzi.com.br',
+            'password' => Hash::make('12345678'),
+        ]);
+
+        User::factory()->create([
+            'name'     => 'João Silva',
+            'email'    => 'joao@barezzi.com.br',
             'password' => Hash::make('12345678'),
         ]);
 
@@ -48,6 +54,7 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             PermissionSeeder::class,
             AttributeSeeder::class,
+            MedicationSeeder::class,
         ]);
     }
 }

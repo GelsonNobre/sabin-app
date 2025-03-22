@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('stock_movements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('medication_id')->constrained()->onDelete('cascade');
+            $table->foreignId('medication_id')->constrained('medications')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->integer('quantity');
+            $table->date('expirate_date');
+            $table->string('batch');
             $table->enum('type', ['entrada', 'saída']);
             $table->timestamps();
         });

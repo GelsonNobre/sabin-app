@@ -14,10 +14,7 @@ return new class extends Migration
         Schema::create('medications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('Producer');
-            $table->date('expirate_date');
-            $table->string('batch');
-            $table->string('shot');
+            $table->string('producer');
             $table->string('type_of_aplication');
             $table->decimal('price', 10, 2);
             $table->string('age_type');

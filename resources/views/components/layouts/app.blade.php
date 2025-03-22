@@ -9,6 +9,9 @@
     <title>{{ isset($title) ? $title . ' - ' . config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+     {{--  Currency  --}}
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/robsontenorio/mary@0.44.2/libs/currency/currency.js"></script>
 </head>
 
 <body class="min-h-screen bg-base-200/50 font-sans antialiased dark:bg-slate-700">
@@ -64,7 +67,7 @@
                     <x-menu-item title="Hello" icon="o-sparkles" link="/" />
                 @endcan
                 @can('read_persons')
-                    <x-menu-item title="Pessoas" icon="o-identification" link="/persons" />
+                    <x-menu-item title="Medicações" icon="o-identification" link="/medications" />
                 @endcan
                 @can('read_users')
                     <x-menu-item title="Usuários" icon="o-users" link="/users" />
@@ -73,7 +76,7 @@
                     <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
                 @endcan
                 <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
+                    <x-menu-item title="Estoque" icon="o-wifi" link="/stock" />
                     <x-menu-item title="Archives" icon="o-archive-box" link="####" />
                 </x-menu-sub>
             </x-menu>

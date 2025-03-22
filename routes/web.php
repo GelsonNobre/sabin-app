@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\{Route};
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/login', Login::class)->name('login');
 
 Route::middleware('auth')->group(function () {
@@ -24,8 +25,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/roles', \App\Livewire\Role\Index::class)->name('roles');
 
-    Route::get('/persons', \App\Livewire\Person\Index::class)->name('persons');
-    Route::get('/persons/create', \App\Livewire\Person\Create::class)->name('persons.create');
-    Route::get('/persons/{id}', \App\Livewire\Person\Show::class)->name('persons.show');
-    Route::get('/persons/{id}/edit', \App\Livewire\Person\Edit::class)->name('persons.edit');
+    Route::get('/medications', \App\Livewire\Medication\Index::class)->name('medications');
+    Route::get('/medications/create', \App\Livewire\Medication\Create::class)->name('medications.create');
+    Route::get('/medications/{medication}/edit', \App\Livewire\Medication\Edit::class)->name('medications.edit');
+    Route::get('/medications/{medication}', \App\Livewire\Medication\Show::class)->name('medications.show');
+
+    Route::get('/stock', \App\Livewire\Stock\Index::class)->name('stock');
+    Route::get('/stock/create', \App\Livewire\Stock\Create::class)->name('stock.create');
+    Route::get('/stock/{stock}/edit', \App\Livewire\Stock\Edit::class)->name('stock.edit');
+    Route::get('/stock/{stock}', \App\Livewire\Stock\Show::class)->name('stock.show');
 });

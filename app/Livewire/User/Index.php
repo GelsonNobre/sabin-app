@@ -22,7 +22,7 @@ class Index extends Component
     /** @var array|string[] */
     public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
 
-    public int $perPage = 5;
+    public int $perPage = 10;
 
     #[On('user::created')]
     #[On('user::updated')]
