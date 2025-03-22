@@ -45,7 +45,7 @@ class Create extends Component
             (object) ['id' => 'IM', 'name' => 'Intramuscular'],
             (object) ['id' => 'IV', 'name' => 'Intravenosa'],
             (object) ['id' => 'SC', 'name' => 'Subcutanea'],
-            (object) ['id' => 'IA', 'name' => 'Intraarticular'],
+            (object) ['id' => 'IA', 'name' => 'Intra-articular'],
         ]);
     }
 

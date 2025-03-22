@@ -16,14 +16,7 @@ return new class () extends Migration {
             $table->timestamps();
         });
 
-        Schema::create('attribute_person', function (Blueprint $table) {
-
-            $table->id();
-            $table->foreignId('attribute_id')->constrained('attributes')->onDelete('cascade');
-            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
-            $table->timestamps();
-
-        });
+      
     }
 
     /**
