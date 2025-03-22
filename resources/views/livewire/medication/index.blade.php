@@ -47,7 +47,7 @@
                     </div>
                 @endscope
             </x-table>
-            {{-- <livewire:medication.delete /> --}}
+            <livewire:medication.delete />
         @else
             <x-alert title="Nenhuma medicação encontrada!" icon="o-exclamation-triangle" shadow />
         @endif
