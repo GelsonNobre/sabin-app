@@ -27,11 +27,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/medications', \App\Livewire\Medication\Index::class)->name('medications');
     Route::get('/medications/create', \App\Livewire\Medication\Create::class)->name('medications.create');
-    Route::get('/medications/{medication}/edit', \App\Livewire\Medication\Edit::class)->name('medications.edit');
-    Route::get('/medications/{medication}', \App\Livewire\Medication\Show::class)->name('medications.show');
+    Route::get('/medications/{id}/edit', \App\Livewire\Medication\Edit::class)->name('medications.edit');
+    Route::get('/medications/{id}', \App\Livewire\Medication\Show::class)->name('medications.show');
 
     Route::get('/stock', \App\Livewire\Stock\Index::class)->name('stock');
     Route::get('/stock/create', \App\Livewire\Stock\Create::class)->name('stock.create');
-    Route::get('/stock/{stock}/edit', \App\Livewire\Stock\Edit::class)->name('stock.edit');
-    Route::get('/stock/{stock}', \App\Livewire\Stock\Show::class)->name('stock.show');
+    Route::get('/stock/{id}/edit', \App\Livewire\Stock\Edit::class)->name('stock.edit');
+    Route::get('/stock/{id}', \App\Livewire\Stock\Show::class)->name('stock.show');
 });

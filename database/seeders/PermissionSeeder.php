@@ -28,6 +28,9 @@ class PermissionSeeder extends Seeder
 
             ['id' => 8, 'module_id' => 5, 'name' => 'Ver', 'guard' => 'read_procedures'],
             ['id' => 9, 'module_id' => 5, 'name' => 'Criar/Editar', 'guard' => 'write_procedures'],
+
+            ['id' => 10, 'module_id' => 6, 'name' => 'Ver', 'guard' => 'read_medications'],
+            ['id' => 11, 'module_id' => 6, 'name' => 'Criar/Editar', 'guard' => 'write_medications'],
         ]);
 
         //Role 2 - Administrador
@@ -41,6 +44,8 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 7, 'role_id' => 2, ],
             ['permission_id' => 8, 'role_id' => 2, ],
             ['permission_id' => 9, 'role_id' => 2, ],
+            ['permission_id' => 10, 'role_id' => 2, ],
+            ['permission_id' => 11, 'role_id' => 2, ],
         ]);
 
         //Role 3 - Atendente
@@ -52,12 +57,18 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 8, 'role_id' => 2, ],
         ]);
 
-
         //Role 4 - Atendente
         DB::table('permission_role')->insert([
             ['permission_id' => 1, 'role_id' => 4, ], // Ler Dashboard
             ['permission_id' => 2, 'role_id' => 4, ], // read_users
             ['permission_id' => 8, 'role_id' => 2, ],
+        ]);
+
+        //Role 5 - Professor
+        DB::table('permission_role')->insert([
+            ['permission_id' => 1, 'role_id' => 5, ], // Ler Dashboard
+            ['permission_id' => 2, 'role_id' => 5, ], // read_users
+            ['permission_id' => 3, 'role_id' => 5, ],
         ]);
     }
 }

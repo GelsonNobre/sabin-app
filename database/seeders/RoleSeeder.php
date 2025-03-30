@@ -19,6 +19,7 @@ class RoleSeeder extends Seeder
             ['id' => 2, 'name' => 'Administrador', 'is_support' => false],
             ['id' => 3, 'name' => 'Gerente', 'is_support' => false],
             ['id' => 4, 'name' => 'Atendente', 'is_support' => false],
+            ['id' => 5, 'name' => 'Professor', 'is_support' => false],
         ]);
 
         DB::table('role_user')->insert([
@@ -32,18 +33,33 @@ class RoleSeeder extends Seeder
         ]);
 
         DB::table('role_user')->insert([
-            'role_id' => 3,
+            'role_id' => 2,
             'user_id' => 3,
         ]);
 
         DB::table('role_user')->insert([
-            'role_id' => 4,
+            'role_id' => 2,
             'user_id' => 4,
         ]);
 
         DB::table('role_user')->insert([
-            'role_id' => 4,
+            'role_id' => 2,
             'user_id' => 5,
+        ]);
+
+        DB::table('role_user')->insert([
+            'role_id' => 2,
+            'user_id' => 6,
+        ]);
+
+        DB::table('role_user')->insert([
+            'role_id' => 2,
+            'user_id' => 7,
+        ]);
+
+        DB::table('role_user')->insert([
+            'role_id' => 5,
+            'user_id' => 8,
         ]);
     }
 }

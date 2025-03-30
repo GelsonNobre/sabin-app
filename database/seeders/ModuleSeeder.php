@@ -20,6 +20,7 @@ class ModuleSeeder extends Seeder
             ['id' => 3, 'name' => 'Tipos de Usuários', 'route' => 'roles'],
             ['id' => 4, 'name' => 'Pessoas', 'route' => 'persons'],
             ['id' => 5, 'name' => 'Procedimentos', 'route' => 'procedures'],
+            ['id' => 6, 'name' => 'Medicamentos', 'route' => 'medications'],
         ]);
     }
 }

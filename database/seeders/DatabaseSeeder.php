@@ -49,6 +49,18 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('12345678'),
         ]);
 
+        User::factory()->create([
+            'name'     => 'Jorge',
+            'email'    => 'jorge@barezzi.com.br',
+            'password' => Hash::make('12345678'),
+        ]);
+
+        User::factory()->create([
+            'name'     => 'Prof. Lucas',
+            'email'    => 'prof@barezzi.com.br',
+            'password' => Hash::make('12345678'),
+        ]);
+
         $this->call([
             RoleSeeder::class,
             ModuleSeeder::class,
