@@ -64,7 +64,7 @@
                 @endif
 
                 @can('read_dashboard')
-                    <x-menu-item title="Hello" icon="o-sparkles" link="/" />
+                    <x-menu-item title="Painel" icon="o-sparkles" link="/" />
                 @endcan
                 @can('read_persons')
                     <x-menu-item title="Medicações" icon="o-identification" link="/medications" />
@@ -75,10 +75,14 @@
                 @can('read_roles')
                     <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
                 @endcan
-                <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-menu-item title="Estoque" icon="o-wifi" link="/stock" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
+
+                @canany(['read_medications'])
+                    <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
+                        <x-menu-item title="Estoque" icon="o-wifi" link="/stock" />
+                        <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+                    </x-menu-sub>
+                @endcan
+
             </x-menu>
         </x-slot:sidebar>
 

@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <!-- HEADER -->
     <x-header title="Hello" separator progress-indicator>
         <x-slot:middle class="!justify-end">
@@ -29,4 +29,16 @@
             <x-button label="Done" icon="o-check" class="btn-primary" @click="$wire.drawer = false" />
         </x-slot:actions>
     </x-drawer>
+</div> --}} 
+
+<div>
+    <x-header title="Painel em Desenvolvimento" separator progress-indicator>
+    </x-header>
+
+
+    <x-card>
+        <div class="flex flex-col items-center space-y-4">
+            <x-loading class="loading-bars"/>
+        </div>
+    </x-card>    
 </div>

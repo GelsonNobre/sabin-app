@@ -2,20 +2,20 @@
 
 namespace App\Livewire\Medication;
 
-use Livewire\Component;
-use App\Models\Medication;
 use App\Livewire\Forms\MedicationForm;
+use App\Models\Medication;
 use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Foundation\Application;
+use Livewire\Component;
 use Mary\Traits\Toast;
-
-
 
 class Edit extends Component
 {
     use Toast;
 
-    public $indicationTypes, $aplicationTypes = [];
+    public $indicationTypes;
+
+    public $aplicationTypes = [];
 
     public MedicationForm $form;
 
@@ -27,9 +27,12 @@ class Edit extends Component
     public function mount(int $id): void
     {
         $medication = Medication::find($id);
+
+        //dd($medication);
         $this->form->setObject($medication);
-        //$this->indicationTypes = $this->indicationTypes();
-        //$this->aplicationTypes = $this->aplicationTypes();
+        $this->indicationTypes = $this->indicationTypes();
+        $this->aplicationTypes = $this->aplicationTypes();
+
     }
 
     public function indicationTypes()

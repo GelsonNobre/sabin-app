@@ -26,4 +26,18 @@
             <x-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>
     </x-form>
+
+    <x-modal wire:model="showAuthorizationModal" class="backdrop-blur" box-class="bg-red-50 p-10 w-[400px] text-center">
+        <div class="flex flex-col items-center space-y-4">
+            <x-icon name="o-x-circle" class="w-10 h-10 text-red-600" />
+            <p class="text-red-800 font-semibold">Você não tem permissão para acessar essa funcionalidade.</p>
+            <x-loading class="loading-infinity w-12 h-12 text-red-600" />
+            <x-slot:actions>
+                <x-button label="Ok" class="btn-warning" link="{{ route('dashboard') }}" />
+            </x-slot:actions>
+        </div>
+    
+        
+    </x-modal>
+    
 </div>

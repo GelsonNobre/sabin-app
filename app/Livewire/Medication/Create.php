@@ -3,19 +3,25 @@
 namespace App\Livewire\Medication;
 
 use App\Livewire\Forms\MedicationForm;
-use Livewire\Component;
+use App\Traits\HandlesAuthorizationFeedback;
 use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Foundation\Application;
+use Livewire\Component;
 use Mary\Traits\Toast;
 
 class Create extends Component
 {
     use Toast;
 
-    public $indicationTypes, $aplicationTypes = [];
+    use HandlesAuthorizationFeedback;
+
+    public $indicationTypes;
+
+    public $aplicationTypes = [];
 
     public MedicationForm $form;
 
+    public bool $showAuthorizationModal = false;
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
@@ -27,7 +33,6 @@ class Create extends Component
         $this->indicationTypes = $this->indicationTypes();
         $this->aplicationTypes = $this->aplicationTypes();
     }
-
 
     public function indicationTypes()
     {
@@ -49,9 +54,12 @@ class Create extends Component
         ]);
     }
 
-
     public function submit(): void
     {
+        if (!$this->authorizeWithMessage('write_medications')) {
+            return;
+        }
+
         $this->form->store();
         $this->success('Nova medicação criada com sucesso!');
         $this->redirect('/medications');

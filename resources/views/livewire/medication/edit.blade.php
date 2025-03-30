@@ -1,6 +1,6 @@
 <div>
     <!-- HEADER -->
-    <x-header title="Nova Medicação" separator progress-indicator>
+    <x-header :title="'Editando: ' . ($this->form->object?->name)" separator progress-indicator>
         <x-slot:actions>
             <x-button label="Cancelar" link="{{ route('medications') }}" />
         </x-slot:actions>
