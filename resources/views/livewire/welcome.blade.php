@@ -32,7 +32,7 @@
 </div> --}} 
 
 <div>
-    <x-header title="Painel em Desenvolvimento" separator progress-indicator>
+    <x-header title="Painel em Desenvolvimento!" separator progress-indicator>
     </x-header>
 
 
