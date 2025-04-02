@@ -11,8 +11,8 @@ class MedicationSeeder extends Seeder
     {
         DB::table('medications')->insert([
             [
-                'name'               => 'Paracetamol',
-                'producer'           => 'Medley',
+                'name'               => 'Diazepam',
+                'producer'           => 'Cristália',
                 'type_of_aplication' => 'IM',
                 'price'              => 12.50,
                 'age_type'           => 'adulto',
@@ -20,8 +20,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Ibuprofeno',
-                'producer'           => 'Neo Química',
+                'name'               => 'Dipirona Sódica',
+                'producer'           => 'Sanofi',
                 'type_of_aplication' => 'IM',
                 'price'              => 18.90,
                 'age_type'           => 'adulto',
@@ -29,8 +29,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Amoxicilina',
-                'producer'           => 'EMS',
+                'name'               => 'Ceftriaxona',
+                'producer'           => 'Aché',
                 'type_of_aplication' => 'IM',
                 'price'              => 25.00,
                 'age_type'           => 'infantil',
@@ -38,8 +38,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Dipirona Sódica',
-                'producer'           => 'Sanofi',
+                'name'               => 'Hidrocortisona',
+                'producer'           => 'Teuto',
                 'type_of_aplication' => 'SC',
                 'price'              => 8.75,
                 'age_type'           => 'adulto',
@@ -47,8 +47,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Omeprazol',
-                'producer'           => 'Aché',
+                'name'               => 'Ampicilina',
+                'producer'           => 'Prati-Donaduzzi',
                 'type_of_aplication' => 'IM',
                 'price'              => 32.90,
                 'age_type'           => 'adulto',
@@ -65,8 +65,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Azitromicina',
-                'producer'           => 'Prati-Donaduzzi',
+                'name'               => 'Tramadol',
+                'producer'           => 'Eurofarma',
                 'type_of_aplication' => 'IM',
                 'price'              => 41.30,
                 'age_type'           => 'adulto',
@@ -83,7 +83,7 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Metformina',
+                'name'               => 'Ondansetrona',
                 'producer'           => 'EMS',
                 'type_of_aplication' => 'IM',
                 'price'              => 22.45,
@@ -92,8 +92,8 @@ class MedicationSeeder extends Seeder
                 'updated_at'         => now(),
             ],
             [
-                'name'               => 'Lorazepam',
-                'producer'           => 'Cristália',
+                'name'               => 'Nebido',
+                'producer'           => 'Bayer',
                 'type_of_aplication' => 'IM',
                 'price'              => 56.80,
                 'age_type'           => 'adulto',

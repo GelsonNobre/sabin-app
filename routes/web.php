@@ -34,4 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/stock/create', \App\Livewire\Stock\Create::class)->name('stock.create');
     Route::get('/stock/{id}/edit', \App\Livewire\Stock\Edit::class)->name('stock.edit');
     Route::get('/stock/{id}', \App\Livewire\Stock\Show::class)->name('stock.show');
+
+    Route::get('/patients', \App\Livewire\Patient\Index::class)->name('patients');
+    Route::get('/patients/create', \App\Livewire\Patient\Create::class)->name('patients.create');
+    Route::get('/patients/{id}/edit', \App\Livewire\Patient\Edit::class)->name('patients.edit');
+    Route::get('/patients/{id}', \App\Livewire\Patient\Show::class)->name('patients.show');
 });

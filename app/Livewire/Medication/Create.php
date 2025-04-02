@@ -28,7 +28,7 @@ class Create extends Component
         return view('livewire.medication.create');
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->indicationTypes = $this->indicationTypes();
         $this->aplicationTypes = $this->aplicationTypes();

@@ -3,7 +3,7 @@
 namespace App\Livewire\Person;
 
 use App\Enums\{PersonTypes, States};
-use App\Livewire\Forms\PersonForm;
+use App\Livewire\Forms\PatientForm;
 use App\Models\Attribute;
 use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Database\Eloquent\Collection;
@@ -16,7 +16,7 @@ class Create extends Component
 {
     use Toast;
 
-    public PersonForm $form;
+    public PatientForm $form;
 
     /** @var array<int, array<string, mixed>> */
     public array $types = [];
@@ -31,7 +31,7 @@ class Create extends Component
 
     public function mount(): void
     {
-        $this->authorize('write_persons');
+        //$this->authorize('write_persons');
 
         $this->types      = PersonTypes::objects();
         $this->form->type = $this->types[0]['id'];
