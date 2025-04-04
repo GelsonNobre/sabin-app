@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderStatus extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+    ];
+    
+    public function orders(): BellongsTo
+    {
+        return $this->belongsTo(orders::class);
+    }
 }
+

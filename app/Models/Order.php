@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
-
-
-
+  
+    public function ordersStatus(): BellongsTo
+    {
+        return $this->belongsTo(ordersStatus::class);
+    }
 
     public function finalizeOrder()
     {
