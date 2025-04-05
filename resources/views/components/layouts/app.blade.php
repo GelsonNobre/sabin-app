@@ -90,6 +90,9 @@
                         @can('read_roles')
                             <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
                         @endcan
+                        @can('read_roles')
+                            <x-menu-item title="Status das Ordens" icon="o-user-group" link="/order-status" />
+                        @endcan
                     </x-menu-sub>
                 @endcan
 

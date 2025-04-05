@@ -39,4 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/patients/create', \App\Livewire\Patient\Create::class)->name('patients.create');
     Route::get('/patients/{id}/edit', \App\Livewire\Patient\Edit::class)->name('patients.edit');
     Route::get('/patients/{id}', \App\Livewire\Patient\Show::class)->name('patients.show');
+    
+    Route::get('/order-status', \App\Livewire\OrderStatus\Index::class)->name('order-status');
+    
+    
 });

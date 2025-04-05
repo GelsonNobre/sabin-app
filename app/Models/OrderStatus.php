@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OrderStatus extends Model
 {
@@ -10,9 +11,9 @@ class OrderStatus extends Model
         'name',
     ];
     
-    public function orders(): BellongsTo
+    public function orders(): HasMany
     {
-        return $this->belongsTo(orders::class);
+        return $this->hasmany(OrderStatus::class);
     }
 }
 
