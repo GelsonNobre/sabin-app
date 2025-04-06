@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name'     => 'Jorge',
+            'name'     => 'Jorge Lucas',
             'email'    => 'jorge@barezzi.com.br',
             'password' => Hash::make('12345678'),
         ]);
@@ -67,6 +67,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             AttributeSeeder::class,
             MedicationSeeder::class,
+            PatientSeeder::class,
         ]);
     }
 }

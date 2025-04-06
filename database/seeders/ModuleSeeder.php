@@ -21,6 +21,10 @@ class ModuleSeeder extends Seeder
             ['id' => 4, 'name' => 'Pessoas', 'route' => 'persons'],
             ['id' => 5, 'name' => 'Procedimentos', 'route' => 'procedures'],
             ['id' => 6, 'name' => 'Medicamentos', 'route' => 'medications'],
+            ['id' => 7, 'name' => 'Estoques', 'route' => 'stocks'],
+            ['id' => 8, 'name' => 'Pacientes', 'route' => 'patients'],
+            ['id' => 9, 'name' => 'Ordens', 'route' => 'orders'],
+            ['id' => 10, 'name' => 'Status de Ordens', 'route' => 'order-statuses'],
         ]);
     }
 }

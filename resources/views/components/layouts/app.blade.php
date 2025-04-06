@@ -66,20 +66,33 @@
                 @can('read_dashboard')
                     <x-menu-item title="Painel" icon="o-sparkles" link="/" />
                 @endcan
-                @can('read_persons')
-                    <x-menu-item title="Medicações" icon="o-identification" link="/medications" />
+                @can('read_patients')
+                    <x-menu-item title="Pacientes" icon="o-users" link="/patients" />
                 @endcan
-                @can('read_users')
-                    <x-menu-item title="Usuários" icon="o-users" link="/users" />
-                @endcan
-                @can('read_roles')
-                    <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
-                @endcan
+                
+                @canany(['read_medications', 'read_stock'])
+                <x-menu-sub title="Medicamentos" icon="o-users">
+                        @can('read_medications')
+                            <x-menu-item title="Medicações" icon="o-identification" link="/medications" />
+                        @endcan
+                        @can('read_stocks')  
+                            <x-menu-item title="Estoque" icon="o-wifi" link="/stock" />
+                        @endcan
+                    </x-menu-sub>
+                @endcanany
 
-                @canany(['read_medications'])
+                
+                @canany(['read_users', 'read_roles'])
                     <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                        <x-menu-item title="Estoque" icon="o-wifi" link="/stock" />
-                        <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+                        @can('read_users')
+                            <x-menu-item title="Usuários" icon="o-users" link="/users" />
+                        @endcan
+                        @can('read_roles')
+                            <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
+                        @endcan
+                        @can('read_roles')
+                            <x-menu-item title="Status das Ordens" icon="o-user-group" link="/order-status" />
+                        @endcan
                     </x-menu-sub>
                 @endcan
 

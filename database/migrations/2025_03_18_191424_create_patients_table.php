@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,16 +13,19 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('age');
+            $table->string('cpf');
             $table->string('gender');
+            $table->string('phone');
             $table->date('birth');
-            $table->text('notes')->nullable();
             $table->string('emergency_number');
             $table->string('address');
             $table->string('number');
-            $table->string('city');
             $table->string('neighborhood');
+            $table->string('complement')->nullable();
+            $table->string('city');
+            $table->string('state');
             $table->string('zip_code');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
