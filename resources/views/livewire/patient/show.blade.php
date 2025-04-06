@@ -9,41 +9,41 @@
     <x-form wire:submit.prevent="submit">
         <x-card title="Dados do Paciente" separator>
             <x-form.row cols="2">
-                <x-input label="Nome" placeholder="Nome" wire:model="form.name" />
-                <x-input label="CPF" placeholder="CPF" wire:model="form.cpf" x-mask="999.999.999-99" />
+                <x-input readonly label="Nome" :value="$object->name" />
+                <x-input readonly label="CPF" :value="$object->cpf" x-mask="999.999.999-99" />
             </x-form.row>
             <x-form.row cols="4">
-                <x-select label="Sexo" :options="$genders" wire:model="form.gender"  />
-                <x-input label="Telefone" placeholder="Telefone" wire:model="form.phone" x-mask="(99) 99999-9999" />
-                <x-datetime label="Data de Nascimento" wire:model="form.birth" icon="o-calendar" />
-                <x-input label="Contato de Emergência" placeholder="Contato de Emergência" wire:model="form.emergency_number" x-mask="(99) 99999-9999" />
+                <x-input readonly label="Sexo" :value="$object->gender"  />
+                <x-input readonly label="Telefone" :value="$object->phone" x-mask="(99) 99999-9999" />
+                <x-input readonly label="Data de Nascimento" :value="$object->birth" icon="o-calendar" />
+                <x-input readonly label="Contato de Emergência" :value="$object->emergency_number" x-mask="(99) 99999-9999" />
             </x-form.row>
         </x-card>
 
         <x-card title="Endereço" separator>
             <x-form.row cols="12">
                 <x-form.col span="6">
-                    <x-input label="Endereço" wire:model="form.address" />
+                    <x-input readonly label="Endereço" :value="$object->address" />
                 </x-form.col>
                 <x-form.col span="4">
-                    <x-input label="Complemento" wire:model="form.complement" />
+                    <x-input readonly label="Complemento" :value="$object->complement" />
                 </x-form.col>
                 <x-form.col span="2">
-                    <x-input label="Número" wire:model="form.number" />
+                    <x-input readonly label="Número" :value="$object->number" />
                 </x-form.col>
             </x-form.row>
             <x-form.row cols="12">
                 <x-form.col span="4">
-                    <x-input label="Bairro" wire:model="form.neighborhood" />
+                    <x-input readonly label="Bairro" :value="$object->district" />
                 </x-form.col>
                 <x-form.col span="4">
-                    <x-input label="Cidade" wire:model="form.city" />
+                    <x-input readonly label="Cidade" :value="$object->city" />
                 </x-form.col>
                 <x-form.col span="2">
-                    <x-select label="UF" :options="$states" placeholder="Selecione" wire:model="form.state" />
+                    <x-input readonly label="UF"  :value="$object->state" />
                 </x-form.col>
                 <x-form.col span="2">
-                    <x-input label="CEP" wire:model="form.zip_code" x-mask="99.999-999" />
+                    <x-input readonly label="CEP" :value="$object->zip_code" x-mask="99.999-999" />
                 </x-form.col>
             </x-form.row>
         </x-card>

@@ -54,7 +54,7 @@
         </x-card>
 
         <x-slot:actions>
-            <x-button label="Cancelar" link="{{ route('medications') }}" />
+            <x-button label="Cancelar" link="{{ route('patients') }}" />
             <x-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
         </x-slot:actions>
     </x-form>
