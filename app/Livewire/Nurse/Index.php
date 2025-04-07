@@ -49,10 +49,17 @@ class Index extends Component
         return [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'name', 'label' => 'Nome'],
+            ['key' => 'birth', 'label' => 'Data de Nascimento'],
+            ['key' => 'phone', 'label' => 'Telefone'],
+            ['key' => 'email', 'label' => 'email'],
             ['key' => 'coren', 'label' => 'COREN'],
-            ['key' => 'specialty', 'label' => 'Especialidade'],
-            ['key' => 'shift', 'label' => 'Turno'],
         ];
+    }
+
+
+    public function create (): void
+    {
+        $this->dispatch('nurse::create');
     }
 
     public function delete(int $id): void

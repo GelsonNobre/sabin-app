@@ -10,7 +10,7 @@
         <x-slot:actions>
             @can('write_nurses')
                 <x-button label="Novo Enfermeiro" responsive icon="o-plus" class="btn-primary"
-                     />
+                wire:click="create" />
             @endcan
         </x-slot:actions>
     </x-header>
@@ -24,16 +24,14 @@
                     <div class="flex items-center space-x-2">
                         <x-button id="show-btn-{{ $nurse->id }}" 
                             wire:key="show-btn-{{ $nurse->id }}" 
-                            icon="o-eye"
-                            link="{{ route('nurses.show', $nurse->id) }}" 
+                            icon="o-eye" 
                             spinner class="btn-ghost btn-sm" 
                         />
 
                         @can('write_nurses')
                             <x-button id="edit-btn-{{ $nurse->id }}" 
                                 wire:key="edit-btn-{{ $nurse->id }}"
-                                icon="o-pencil-square" 
-                                link="{{ route('nurses.edit', $nurse->id) }}" 
+                                icon="o-pencil-square"  
                                 spinner class="btn-ghost btn-sm" 
                             />
 
@@ -47,9 +45,11 @@
                     </div>
                 @endscope
             </x-table>
+            @else
+                <x-alert title="Nenhum enfermeiro encontrado!" icon="o-exclamation-triangle" shadow />
+            @endif
+            <livewire:nurse.create />
+            <livewire:nurse.edit />
             <livewire:nurse.delete />
-        @else
-            <x-alert title="Nenhum enfermeiro encontrado!" icon="o-exclamation-triangle" shadow />
-        @endif
-    </x-card>
+        </x-card>
 </div>
