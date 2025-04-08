@@ -142,6 +142,9 @@
                 @can('read_patients')
                     <x-menu-item title="Pacientes" icon="o-users" link="/patients" />
                 @endcan
+                @can('read_patients')
+                    <x-menu-item title="Enfermeiros" icon="o-users" link="/nurses" />
+                @endcan
                 
                 @canany(['read_medications', 'read_stock'])
                 <x-menu-sub title="Medicamentos" icon="o-users">
