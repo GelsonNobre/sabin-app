@@ -31,7 +31,8 @@
                         @can('write_nurses')
                             <x-button id="edit-btn-{{ $nurse->id }}" 
                                 wire:key="edit-btn-{{ $nurse->id }}"
-                                icon="o-pencil-square"  
+                                icon="o-pencil-square" 
+                                wire:click="edit({{ $nurse->id }})" 
                                 spinner class="btn-ghost btn-sm" 
                             />
 

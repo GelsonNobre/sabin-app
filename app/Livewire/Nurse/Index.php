@@ -62,6 +62,11 @@ class Index extends Component
         $this->dispatch('nurse::create');
     }
 
+    public function edit(int $id): void
+    {
+        $this->dispatch('nurse::edit', id: $id);
+    }
+
     public function delete(int $id): void
     {
         $this->dispatch('nurse::delete', id: $id);

@@ -5,12 +5,15 @@ namespace App\Livewire\Nurse;
 use App\Models\Nurse;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Mary\Traits\Toast;
 
 class Delete extends Component
 {
-    public bool $modal = false;
+    use Toast;
     
     public ?Nurse $nurse = null;
+    
+    public bool $modal = false;
 
     public function render()
     {
@@ -26,11 +29,13 @@ class Delete extends Component
 
     public function destroy(): void
     {
+        $this->authorize('write_nurse');
+
         $this->nurse->delete();
-        $this->reset('modal', 'nurse');
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Enfermeiro excluído com sucesso!'
-        ]);
+        $this->success('Cadastro de enfermeiro excluido com sucesso!');
+        $this->dispatch('nurse::deleted');
+        $this->reset();
+        $this->redirect('/nurses');
     }
+
 }
