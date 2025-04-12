@@ -10,6 +10,15 @@ use App\Models\orderStatus;
 class Order extends Model
 {
     
+    protected $fillable = [
+        'patient_id',
+        'nurse_id',
+        'medication_id',
+        'open_date',
+        'total',
+        'notes',
+    ];
+    
     public function ordersStatus(): BelongsTo
     {
         return $this->belongsTo(orderStatus::class);
