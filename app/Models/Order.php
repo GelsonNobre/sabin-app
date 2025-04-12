@@ -18,7 +18,20 @@ class Order extends Model
         'total',
         'notes',
     ];
-    
+    public function patient()
+    {
+        return $this->belongsTo(\App\Models\Patient::class);
+    }
+
+    public function nurse()
+    {
+        return $this->belongsTo(\App\Models\Nurse::class);
+    }
+
+    public function medication()
+    {
+        return $this->belongsTo(\App\Models\Medication::class);
+    }
     public function ordersStatus(): BelongsTo
     {
         return $this->belongsTo(orderStatus::class);
