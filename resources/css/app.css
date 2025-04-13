@@ -108,3 +108,4 @@
 .form-col-12 {
     @apply flex flex-col gap-1.5 sm:col-span-12;
 }
+

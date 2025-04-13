@@ -43,4 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/order-status', \App\Livewire\OrderStatus\Index::class)->name('order-status');
     
     
+    Route::get('/nurses', \App\Livewire\Nurse\Index::class)->name('nurses');
+
+    Route::get('/orders', \App\Livewire\Order\Index::class)->name('orders');
+    Route::get('/orders/create', \App\Livewire\Order\Create::class)->name('orders.create');
+    Route::get('/orders/{id}/edit', \App\Livewire\Order\Edit::class)->name('orders.edit');
+    Route::get('/orders/{id}', \App\Livewire\Order\Show::class)->name('orders.show');
 });
