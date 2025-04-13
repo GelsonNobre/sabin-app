@@ -213,13 +213,6 @@
                 </li>
                 
                 <li>
-                    <a href="/patients" id="menu-patients" class="flex items-center gap-3 px-4 py-2">
-                        <x-icon name="o-users" class="w-5 h-5" />
-                        <span>Pacientes</span>
-                    </a>
-                </li>
-                
-                <li>
                     <details id="submenu-medications">
                         <summary class="flex items-center gap-3 px-4 py-2">
                             <x-icon name="o-users" class="w-5 h-5" />
@@ -230,12 +223,6 @@
                                 <a href="/medications" id="menu-medications" class="flex items-center gap-3 px-4 py-2 pl-7">
                                     <x-icon name="o-identification" class="w-5 h-5" />
                                     <span>Medicações</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/stock" id="menu-stock" class="flex items-center gap-3 px-4 py-2 pl-7">
-                                    <x-icon name="o-wifi" class="w-5 h-5" />
-                                    <span>Estoque</span>
                                 </a>
                             </li>
                         </ul>
@@ -259,12 +246,6 @@
                                 <a href="/roles" id="menu-roles" class="flex items-center gap-3 px-4 py-2 pl-7">
                                     <x-icon name="o-user-group" class="w-5 h-5" />
                                     <span>Perfis</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/order-status" id="menu-order-status" class="flex items-center gap-3 px-4 py-2 pl-7">
-                                    <x-icon name="o-user-group" class="w-5 h-5" />
-                                    <span>Status das Ordens</span>
                                 </a>
                             </li>
                         </ul>

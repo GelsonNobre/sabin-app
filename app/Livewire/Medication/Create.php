@@ -61,7 +61,6 @@ class Create extends Component
         }
 
         $this->form->store();
-        $this->success('Nova medicação criada com sucesso!');
-        $this->redirect('/medications');
+        $this->success('Nova medicação criada com sucesso!', redirectTo: '/medications');
     }
 }

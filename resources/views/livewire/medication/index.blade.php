@@ -8,10 +8,10 @@
             </div>
         </x-slot:middle>
         <x-slot:actions>
-            @can('write_medications')
+            
                 <x-button label="Nova Medicação" responsive icon="o-plus" class="btn-primary"
                     link="{{ route('medications.create') }}" />
-            @endcan
+            
         </x-slot:actions>
     </x-header>
 
