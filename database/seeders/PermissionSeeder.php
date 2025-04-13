@@ -91,6 +91,8 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 3, 'role_id' => 5, ], // Entrega de 31/03/2025
             ['permission_id' => 4, 'role_id' => 5, ], // Entrega de 07/04/2025
             ['permission_id' => 5, 'role_id' => 5, ], // Entrega de 07/04/2025
+            ['permission_id' => 10, 'role_id' => 5, ], // Entrega de 14/04/2025
+            ['permission_id' => 11, 'role_id' => 5, ], // Entrega de 14/04/2025
         ]);
     }
 }
