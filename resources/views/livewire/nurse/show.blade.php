@@ -4,8 +4,8 @@
         <x-modal wire:model="modal" :title="'Mostrar Enfermeiro'" separator>
             <x-form wire:submit.prevent="submit">
                 <div class="space-y-2">
-                    <x-input label="Nome" :value="$nurse->name" disabled />
-                    <x-input label="Data de Nascimento" :value="$nurse->birth" disabled />
+                    <x-input label="Nome" :value="$object->name" disabled />
+                    <x-input label="Data de Nascimento" :value="\Carbon\Carbon::parse($object->birth)->format('d/m/Y')" disabled  />
                 </div>
                 <x-slot:actions>
                     <x-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
