@@ -146,7 +146,7 @@
         <table style="width: 100%">
             <tr>
                 <td width="10%">
-                    <img width="64" src="{{ public_path('images/logomarca.png') }}" alt="3F Implementos e Máquinas Agrícolas" />
+                    <img width="64" src="{{ public_path('images/app-logo-red.jpg') }}" alt="Clinica Barezzi" />
                 </td>
                 <td width="2%"></td>
                 <td width="40%">
@@ -158,7 +158,7 @@
                 <td width="2%"></td>
                 <td width="36%" style="text-align: right;">
                     <div>
-                        <h2>Despesa</h2>
+                        <h2>Ordem de Serviço</h2>
                         <p>Número: <strong>{{ $number }}</strong></p>
                         {{-- <p>Data: <strong>{{ $expense->created_at->format('d/m/Y') }}</strong></p> --}}
                         <br>
@@ -180,35 +180,35 @@
         <div class="space-y-6 py-6">
             <!-- Dados da Ordem -->
             <section>
-                <h3>Detalhes das Despesas de Viagem</h3>
+                <h3>Detalhes do Serviço e Medicamentos</h3>
                 <table>
                     <tr>
                         <td colspan="3">
-                            <p>
-                                <span>Consultor:</span> {{ $order->user->name ?? 'Sem consultor' }} 
-                            </p>
+                            <p><span>Paciente:</span> {{ $order->patient->name ?? 'Sem paciente' }}</p>
                         </td>
                     </tr>
                     <tr>
                         <td width="33%">
-                            <p>
-                                <span>Região:</span> {{ $order->open_date ?? 'Sem região' }}
-                            </p>
+                            <p><span>Data do Serviço:</span> {{ $order->open_date ? $order->open_date->format('d/m/Y') : 'Sem data' }}</p>
                         </td>
                         <td width="33%">
-                            <p> <span>Data:</span> @dateBR($order->start_date) à @dateBR($order->end_date) </p> 
-                            
-                        
-                        </td>
-                        <td width="33%">
-                            <p>
-                                <span>Valor:</span> @currency($order->total)
-                            </p>
+                            <p><span>Status:</span> {{ $order->orderStatus->name ?? 'Sem status' }}</p>
                         </td>
                     </tr>
-                    
+                    <tr>
+                        <td width="33%">
+                            <p><span>Atendente:</span> {{ $order->user->name ?? 'Sem atendente' }}</p>
+                        </td>
+                        <td width="33%">
+                            <p><span>Médico:</span> {{ $order->doctor ?? 'Sem médico' }}</p>
+                        </td>
+                        <td width="33%">
+                            <p><span>CRM:</span> {{ $order->CRM ?? 'Sem CRM' }}</p>
+                        </td>
+                    </tr>
                 </table>
             </section>
+            
 
             <!-- Tabela de Itens -->
         
@@ -252,7 +252,7 @@
                 <section style="margin-top: 100px">
                     <div style="border-top: 1px solid #000000; padding-top: 10px; width: 300px; margin: auto">
                         <p style="text-align: center">
-                            {{ $order->user->name ?? 'Sem consultor' }}  
+                            {{ $order->nurse->name ?? 'Sem enfermeiro(a)' }}  
                         </p>
                     </div>
                 </section>

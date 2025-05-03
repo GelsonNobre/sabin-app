@@ -21,6 +21,11 @@ class Order extends Model
         'CRM',
         'notes',
     ];
+
+    protected $casts = [
+        'open_date' => 'date',
+    ];
+
     public function patient()
     {
         return $this->belongsTo(\App\Models\Patient::class);
@@ -29,6 +34,11 @@ class Order extends Model
     public function nurse()
     {
         return $this->belongsTo(\App\Models\Nurse::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function medications()

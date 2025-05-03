@@ -69,18 +69,22 @@
                 @can('read_dashboard')
                     <x-menu-item title="Hello" icon="o-sparkles" link="/" />
                 @endcan
-                @can('read_persons')
-                    <x-menu-item title="Pessoas" icon="o-identification" link="/persons" />
+                @can('read_patients')
+                    <x-menu-item title="Pacientes" icon="o-sparkles" link="/patients" />
+                @endcan
+                @can('read_nurses')
+                    <x-menu-item title="Enfermeiros(as)" icon="o-sparkles" link="nurses" />
+                @endcan
+                @can('read_medications')
+                    <x-menu-item title="Medicamentos" icon="o-sparkles" link="/medications" />
                 @endcan
                 @can('read_users')
                     <x-menu-item title="Usuários" icon="o-users" link="/users" />
                 @endcan
-                @can('read_roles')
-                    <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
-                @endcan
                 <x-menu-sub title="Configurações" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
+                    @can('read_roles')
+                        <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
+                    @endcan
                 </x-menu-sub>
             </x-menu>
         </x-slot:sidebar>
