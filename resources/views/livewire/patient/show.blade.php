@@ -15,7 +15,7 @@
             <x-form.row cols="4">
                 <x-input readonly label="Sexo" :value="$object->gender"  />
                 <x-input readonly label="Telefone" :value="$object->phone" x-mask="(99) 99999-9999" />
-                <x-input readonly label="Data de Nascimento" :value="$object->birth" icon="o-calendar" />
+                <x-input readonly label="Data de Nascimento" :value="\Carbon\Carbon::parse($object->birth)->format('d/m/Y')" icon="o-calendar" />
                 <x-input readonly label="Contato de Emergência" :value="$object->emergency_number" x-mask="(99) 99999-9999" />
             </x-form.row>
         </x-card>
@@ -34,7 +34,7 @@
             </x-form.row>
             <x-form.row cols="12">
                 <x-form.col span="4">
-                    <x-input readonly label="Bairro" :value="$object->district" />
+                    <x-input readonly label="Bairro" :value="$object->neighborhood" />
                 </x-form.col>
                 <x-form.col span="4">
                     <x-input readonly label="Cidade" :value="$object->city" />

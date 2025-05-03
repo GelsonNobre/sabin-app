@@ -112,4 +112,26 @@ class Formatter
 
         return $date->format('d/m/Y H:i:s');
     }
+
+    public static function safeCurrency(mixed $value): string
+    {
+        if (is_null($value) || $value === '') {
+            return 'R$ 0,00';
+        }
+
+        // Se vier como string com vírgula, substitui por ponto
+        if (is_string($value)) {
+            $value = str_replace(',', '.', $value);
+        }
+
+        // Garante que é float
+        $value = is_numeric($value) ? (float) $value : 0;
+
+        return 'R$ ' . number_format($value, 2, ',', '.');
+    }
+
+    public static function toFloat(mixed $value): float
+    {
+        return (float) str_replace(',', '.', (string) $value);
+    }
 }

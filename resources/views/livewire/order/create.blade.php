@@ -10,44 +10,38 @@
 
         <x-card title="Dados da Ordem" separator>
             <x-form.row cols="3">
-                <x-select 
-                    label="Paciente" 
-                    wire:model="form.patient_id" 
-                    :options="$patients->pluck('name', 'id')" 
-                    placeholder="Selecione um paciente" />
+                <x-choices label="Paciente" :options="$patientsSearchable" placeholder="Pesquisar Paciente" search-function="patients"
+                    no-result-text="Paciente nao encontrado" placeholder-value="0" min-chars="3"
+                    wire:model="form.patient_id" single searchable 
+                />
 
-                <x-select 
-                    label="Enfermeiro" 
-                    wire:model="form.nurse_id" 
-                    :options="$nurse->pluck('name', 'id')" 
-                    placeholder="Selecione um enfermeiro" />
+                <x-choices label="Enfermeiro(a)" :options="$nursesSearchable" placeholder="Pesquisar Enfermeiro(a)" search-function="nurses"
+                    no-result-text="Enfermeiro(a) nao encontrado(a)" placeholder-value="0" min-chars="3"
+                    wire:model="form.nurse_id" single searchable
+                />
 
-                <x-select 
-                    label="Medicação" 
-                    wire:model="form.medication_id" 
-                    :options="$medications->pluck('name', 'id')" 
-                    placeholder="Selecione a medicação" />
+                <x-select label="Status da Ordem" :options="$orderStatuses" wire:model="form.order_status_id" />
+  
             </x-form.row>
         </x-card>
 
         <x-card title="Informações Clínicas" separator>
             <x-form.row cols="3">
-                <x-input 
-                    label="Data de Abertura" 
-                    type="date" 
+                <x-datetime 
+                    label="Data do Atendimento" 
+                    icon="o-calendar"
                     wire:model="form.open_date" />
 
                 <x-input 
-                    label="Valor Total" 
-                    wire:model.lazy="form.total" 
-                    prefix="R$" 
-                    money 
-                    locale="pt-BR" />
+                    label="Médico Responsável" 
+                    wire:model.lazy="form.doctor" 
+                    placeholder="Médico" />
 
                 <x-input 
                     label="CRM do Médico" 
                     wire:model="form.CRM" 
-                    placeholder="1234567" />
+                    placeholder="CRM"
+                    x-mask="999.999" />
             </x-form.row>
 
             <x-form.row cols="1">
@@ -57,6 +51,16 @@
                     placeholder="Anotações sobre a ordem..." />
             </x-form.row>
         </x-card>
+
+        {{-- Aqui acessamos o componente de itens, observe o caminho livewire:order.item.index
+        estamos chamando o componente index criado dentro da pasta item --}}
+        <x-card title="Itens" separator>
+            <div wire:ignore>
+                <livewire:order.item.index wire:model="form.items" wire:key="order-item-index" />
+            </div>
+        </x-card>
+        {{-- Aqui é o fim da chamada do componente item arquivo index --}}
+
 
         <x-slot:actions>
             <x-button label="Cancelar" link="{{ route('orders') }}" />

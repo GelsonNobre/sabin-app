@@ -53,5 +53,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('currency', function ($expression) {
             return "<?php echo number_format($expression, 2, ',', '.'); ?>";
         });
+
+        Blade::directive('raw_currency', function ($expression) {
+            return "<?php echo \App\Helpers\Formatter::safeCurrency($expression); ?>";
+        });
     }
 }

@@ -11,45 +11,46 @@ class Edit extends Component
 {
     use Toast;
 
-    public ?int $id = null;
+    #[Validate('required', as: 'quantidade')]
+    public ?float $quantity;
 
-    public ?string $name = null;
+    #[Validate('required', as: 'valor')]
+    public ?float $price;
 
-    public array $item = [];
+    public array $med = [];
 
     public bool $editing = false;
 
-    public function render():View
+    public function render(): View
     {
         return view('livewire.order.item.edit');
     }
 
     public function edit(): void
     {
-        $this->id          = $this->item['id'];
-        $this->name         = $this->item['name'];
-        $this->editing     = true;
+        $this->quantity          = $this->med['quantity'];
+        $this->price             = $this->med['price'];
+        $this->editing           = true;
     }
 
 
-    public function update():void
+    public function update(): void
     {
-        $data = $this->validate();
-
-        $this->item['id'] = $this->id;
-        $this->item['name'] = $this->name;
+        $data                      = $this->validate();
+        $this->med['quantity'] = $data['quantity'];
+        $this->med['price']    = $data['price'];
+        $this->med['total']    = ($data['quantity'] * $data['price']);
 
         $this->editing = false;
 
-        $this->dispatch('order::item::updated', items: [$this->item['id'] => $this->item])->to('order.item.index');
-        $this->success('Item atualizado com sucesso!');
-        $this->resetExcept('item');
-
+        $this->dispatch('order::item::updated', object: $this->med)->to('order.item.index');
+        $this->success('Medicamento atualizado com sucesso!');
+        $this->resetExcept('med');
     }
 
     public function delete(): void
     {
-        $this->dispatch('order::item::deleted', key: $this->item['id'])->to('order.item.index');
+        $this->dispatch('order::item::deleted', key: $this->med['id'])->to('order.item.index');
         $this->success('Item deletado com sucesso!');
     }
 }

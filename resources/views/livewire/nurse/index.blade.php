@@ -19,13 +19,16 @@
     <x-card>
         @if ($this->nurses->isNotEmpty())
             <x-table :headers="$this->headers" :rows="$this->nurses" :sort-by="$sortBy" with-pagination>
-
+                @scope('cell_birth', $nurse)
+                    @dateBR($nurse->birth)
+                @endscope
                 @scope('actions', $nurse)
                     <div class="flex items-center space-x-2">
                         <x-button id="show-btn-{{ $nurse->id }}" 
                             wire:key="show-btn-{{ $nurse->id }}" 
                             icon="o-eye" 
                             spinner class="btn-ghost btn-sm" 
+                            wire:click="show({{ $nurse->id }})"
                         />
 
                         @can('write_nurses')
@@ -52,5 +55,6 @@
             <livewire:nurse.create />
             <livewire:nurse.edit />
             <livewire:nurse.delete />
+            <livewire:nurse.show />
         </x-card>
 </div>

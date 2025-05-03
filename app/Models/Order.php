@@ -4,20 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\orderStatus;
+use App\Models\OrderStatus;
+use App\Models\Medication;
 
 
 class Order extends Model
 {
-    
+
     protected $fillable = [
+        'user_id',
+        'order_status_id',
         'patient_id',
         'nurse_id',
-        'medication_id',
         'open_date',
-        'total',
+        'doctor',
+        'CRM',
         'notes',
     ];
+
+    protected $casts = [
+        'open_date' => 'date',
+    ];
+
     public function patient()
     {
         return $this->belongsTo(\App\Models\Patient::class);
@@ -28,13 +36,21 @@ class Order extends Model
         return $this->belongsTo(\App\Models\Nurse::class);
     }
 
-    public function medication()
+    public function user()
     {
-        return $this->belongsTo(\App\Models\Medication::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
-    public function ordersStatus(): BelongsTo
+
+    public function medications()
     {
-        return $this->belongsTo(orderStatus::class);
+        return $this->belongsToMany(Medication::class, 'order_medications')
+            ->withPivot(['quantity', 'price'])
+            ->withTimestamps();
+    }
+
+    public function orderStatus(): BelongsTo
+    {
+        return $this->belongsTo(OrderStatus::class);
     }
 
     public function finalizeOrder()

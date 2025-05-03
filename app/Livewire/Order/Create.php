@@ -3,10 +3,13 @@
 namespace App\Livewire\Order;
 
 use App\Livewire\Forms\OrderForm;
+use Illuminate\Contracts\View\{Factory, View};
+use Illuminate\Foundation\Application;
 use App\Models\Medication;
 use App\Models\Order;
 use App\Models\Patient;
 use App\Traits\HandlesAuthorizationFeedback;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Livewire\Component;
 use Mary\Traits\Toast;
@@ -25,15 +28,19 @@ class Create extends Component
     public bool $showAuthorizationModal = false;
 
 
-    public $patients;
+    /** @var EloquentCollection<int, Person> */
+    public ?EloquentCollection $patientsSearchable = null;
+
+    /** @var EloquentCollection<int, Person> */
+    public ?EloquentCollection $nursesSearchable = null;
 
     public $medications;
 
-    public $orderStatus;
+    public array $orderStatuses = [];
 
-    public $nurse;
 
-    public function render()
+
+    public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.order.create');
     }
@@ -41,21 +48,40 @@ class Create extends Component
 
     public function mount(): void
     {
-        $this->patients = Patient::all(['id', 'name']);
-        $this->medications = Medication::all(['id', 'name']);
-        $this->orderStatus = OrderStatus::all(['id', 'name']);
-        $this->nurse = Nurse::all(['id', 'name']);
+        $this->patients();
+        $this->nurses();
+
+        $this->orderStatuses = OrderStatus::all()->map(function ($status) {
+            return (object)[
+                'id'   => $status->id,
+                'name' => $status->name,
+            ];
+        })->toArray();
     }
 
 
-    public function nurse(): void    
+    public function nurses(string $value = ''): void
     {
-        
+        $this->nursesSearchable = Nurse::query()
+            ->where('name', 'like', "%$value%")
+            ->take(5)
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function patients(string $value = ''): void
+    {
+        $this->patientsSearchable = Patient::query()
+            ->where('name', 'like', "%$value%")
+            ->take(5)
+            ->orderBy('name')
+            ->get();
     }
 
 
     public function submit(): void
     {
+        //dd($this->form);
         if (!$this->authorizeWithMessage('write_orders')) {
             return;
         }
@@ -67,6 +93,6 @@ class Create extends Component
 
 
 
-//Chamar a Função Quando a Ordem for Finalizada
-//$this->finalizeOrder();
+    //Chamar a Função Quando a Ordem for Finalizada
+    //$this->finalizeOrder();
 }

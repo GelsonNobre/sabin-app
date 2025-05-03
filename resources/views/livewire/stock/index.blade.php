@@ -47,10 +47,10 @@
                     </div>
                 @endscope
             </x-table>
-            {{-- <livewire:medication.delete /> --}}
-        @else
+            @else
             <x-alert title="Nenhuma movimentação encontrada!" icon="o-exclamation-triangle" shadow />
-        @endif
+            @endif
+            <livewire:stock.delete /> 
     </x-card>
 </div>
 

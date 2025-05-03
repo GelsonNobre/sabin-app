@@ -71,4 +71,9 @@ class Index extends Component
     {
         $this->dispatch('nurse::delete', id: $id);
     }
+
+    public function show(int $id): void
+    {
+        $this->dispatch('nurse::show', id: $id);
+    }
 }

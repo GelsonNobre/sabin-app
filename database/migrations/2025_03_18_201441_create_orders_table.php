@@ -16,20 +16,20 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->foreignId('nurse_id')->constrained()->onDelete('cascade');
-            $table->foreignId('medication_id')->constrained()->onDelete('cascade');
+            $table->foreignId('order_status_id')->constrained('order_statuses')->onDelete('cascade');
             $table->date('open_date');
-            $table->decimal('total', 10, 2);
             $table->string('doctor');
             $table->string('CRM');
             $table->text('notes')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('order_medication', function (Blueprint $table) {
+        Schema::create('order_medications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
             $table->foreignId('medication_id')->constrained('medications')->onDelete('cascade');
             $table->integer('quantity');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
@@ -39,7 +39,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_medication');
+        Schema::dropIfExists('order_medications');
         Schema::dropIfExists('orders');
     }
 };

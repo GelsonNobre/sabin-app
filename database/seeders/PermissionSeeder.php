@@ -43,56 +43,65 @@ class PermissionSeeder extends Seeder
 
             ['id' => 18, 'module_id' => 10, 'name' => 'Ver', 'guard' => 'read_order_statuses'],
             ['id' => 19, 'module_id' => 10, 'name' => 'Criar/Editar', 'guard' => 'write_order_statuses'],
+
+            ['id' => 20, 'module_id' => 11, 'name' => 'Ver', 'guard' => 'read_nurses'],
+            ['id' => 21, 'module_id' => 11, 'name' => 'Criar/Editar', 'guard' => 'write_nurses'],
         ]);
 
         //Role 2 - Administrador
         DB::table('permission_role')->insert([
-            ['permission_id' => 1, 'role_id' => 2, ],
-            ['permission_id' => 2, 'role_id' => 2, ],
-            ['permission_id' => 3, 'role_id' => 2, ],
-            ['permission_id' => 4, 'role_id' => 2, ],
-            ['permission_id' => 5, 'role_id' => 2, ],
-            ['permission_id' => 6, 'role_id' => 2, ],
-            ['permission_id' => 7, 'role_id' => 2, ],
-            ['permission_id' => 8, 'role_id' => 2, ],
-            ['permission_id' => 9, 'role_id' => 2, ],
-            ['permission_id' => 10, 'role_id' => 2, ],
-            ['permission_id' => 11, 'role_id' => 2, ],
-            ['permission_id' => 12, 'role_id' => 2, ],
-            ['permission_id' => 13, 'role_id' => 2, ],
-            ['permission_id' => 14, 'role_id' => 2, ],
-            ['permission_id' => 15, 'role_id' => 2, ],
-            ['permission_id' => 16, 'role_id' => 2, ],
-            ['permission_id' => 17, 'role_id' => 2, ],
-            ['permission_id' => 18, 'role_id' => 2, ],
-            ['permission_id' => 19, 'role_id' => 2, ],
+            ['permission_id' => 1, 'role_id' => 2,],
+            ['permission_id' => 2, 'role_id' => 2,],
+            ['permission_id' => 3, 'role_id' => 2,],
+            ['permission_id' => 4, 'role_id' => 2,],
+            ['permission_id' => 5, 'role_id' => 2,],
+            ['permission_id' => 6, 'role_id' => 2,],
+            ['permission_id' => 7, 'role_id' => 2,],
+            ['permission_id' => 8, 'role_id' => 2,],
+            ['permission_id' => 9, 'role_id' => 2,],
+            ['permission_id' => 10, 'role_id' => 2,],
+            ['permission_id' => 11, 'role_id' => 2,],
+            ['permission_id' => 12, 'role_id' => 2,],
+            ['permission_id' => 13, 'role_id' => 2,],
+            ['permission_id' => 14, 'role_id' => 2,],
+            ['permission_id' => 15, 'role_id' => 2,],
+            ['permission_id' => 16, 'role_id' => 2,],
+            ['permission_id' => 17, 'role_id' => 2,],
+            ['permission_id' => 18, 'role_id' => 2,],
+            ['permission_id' => 19, 'role_id' => 2,],
+            ['permission_id' => 20, 'role_id' => 2,],
+            ['permission_id' => 21, 'role_id' => 2,],
         ]);
 
         //Role 3 - Atendente
         DB::table('permission_role')->insert([
-            ['permission_id' => 1, 'role_id' => 3, ], // Ler Dashboard
-            ['permission_id' => 2, 'role_id' => 3, ], // read_users
-            ['permission_id' => 6, 'role_id' => 2, ],
-            ['permission_id' => 7, 'role_id' => 2, ],
-            ['permission_id' => 8, 'role_id' => 2, ],
+            ['permission_id' => 1, 'role_id' => 3,], // Ler Dashboard
+            ['permission_id' => 2, 'role_id' => 3,], // read_users
+            ['permission_id' => 6, 'role_id' => 2,],
+            ['permission_id' => 7, 'role_id' => 2,],
+            ['permission_id' => 8, 'role_id' => 2,],
         ]);
 
         //Role 4 - Atendente
         DB::table('permission_role')->insert([
-            ['permission_id' => 1, 'role_id' => 4, ], // Ler Dashboard
-            ['permission_id' => 2, 'role_id' => 4, ], // read_users
-            ['permission_id' => 8, 'role_id' => 2, ],
+            ['permission_id' => 1, 'role_id' => 4,], // Ler Dashboard
+            ['permission_id' => 2, 'role_id' => 4,], // read_users
+            ['permission_id' => 8, 'role_id' => 2,],
         ]);
 
         //Role 5 - Professor
         DB::table('permission_role')->insert([
-            ['permission_id' => 1, 'role_id' => 5, ], // Ler Dashboard
-            ['permission_id' => 2, 'role_id' => 5, ], // Entrega de 31/03/2025
-            ['permission_id' => 3, 'role_id' => 5, ], // Entrega de 31/03/2025
-            ['permission_id' => 4, 'role_id' => 5, ], // Entrega de 07/04/2025
-            ['permission_id' => 5, 'role_id' => 5, ], // Entrega de 07/04/2025
-            ['permission_id' => 10, 'role_id' => 5, ], // Entrega de 14/04/2025
-            ['permission_id' => 11, 'role_id' => 5, ], // Entrega de 14/04/2025
+            ['permission_id' => 1, 'role_id' => 5,], // Ler Dashboard
+            ['permission_id' => 2, 'role_id' => 5,], // Entrega de 31/03/2025
+            ['permission_id' => 3, 'role_id' => 5,], // Entrega de 31/03/2025
+            ['permission_id' => 4, 'role_id' => 5,], // Entrega de 07/04/2025
+            ['permission_id' => 5, 'role_id' => 5,], // Entrega de 07/04/2025
+            ['permission_id' => 10, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 11, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 14, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 15, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 20, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 21, 'role_id' => 5,], // Entrega de 14/04/2025
         ]);
     }
 }
