@@ -48,6 +48,23 @@ class Medication extends Model
         };
     }
 
+    // Definindo o método formattedList
+    public static function formattedList(): array
+    {
+        // Retorna um array com o id, nome e preço de cada medicação
+        return self::select('id', 'name', 'price')
+            ->get()
+            ->map(function ($medication) {
+                return [
+                    'id' => $medication->id,
+                    'name' => $medication->name,
+                    'price' => $medication->price,
+                ];
+            })
+            ->toArray();
+    }
+
+
     public function producer()
     {
         return $this->belongsTo(Medication::class);

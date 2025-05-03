@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\{User};
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Mary\View\Components\Stat;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -68,6 +69,8 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
             MedicationSeeder::class,
             PatientSeeder::class,
+            NurseSeeder::class,
+            StatusSeeder::class,
         ]);
     }
 }

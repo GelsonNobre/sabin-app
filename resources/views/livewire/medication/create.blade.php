@@ -18,7 +18,11 @@
                 <x-form.row cols="3">
                     <x-select label="Tipo de Indicação" :options="$indicationTypes" wire:model="form.age_type" />  
                     <x-select label="Tipo de Aplicação" :options="$aplicationTypes"  wire:model="form.type_of_aplication"  />
-                    <x-input label="Valor da Aplicação" placeholder="0,00" wire:model.lazy="form.price" prefix="R$" money locale="pt-BR" />
+                    <x-input label="Valor da Aplicação" 
+                            placeholder="0,00" 
+                            wire:model.lazy="form.price" 
+                            prefix="R$" money locale="pt-BR"
+                            />
                 </x-form.row>
         </x-card>
         <x-slot:actions>

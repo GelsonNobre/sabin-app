@@ -26,7 +26,6 @@ class Index extends Component
         if ($this->items) {
             $this->updateTotal();
         }
-
     }
 
     public function boot(): void
@@ -38,21 +37,18 @@ class Index extends Component
 
     private function updateTotal(): void
     {
-        $this->total = array_sum(array_column($this->items, 'value'));
-
+        $this->total = array_sum(array_column($this->items, 'total'));
+        // dump(array_column($this->products, 'total'));
+        $this->dispatch('order::value::updated', total: $this->total);
     }
 
-    /** @param array<string, mixed> $object */
     #[On('order::item::created')]
     public function store(array $object): void
     {
-
-        if (!is_array($this->items)) {
-            $this->items = [];
+        if (in_array($object['id'], array_keys($this->items))) {
+            unset($this->items[$object['id']]);
         }
-
         $this->items[$object['id']] = $object;
-
         $this->updateTotal();
     }
 
@@ -60,14 +56,13 @@ class Index extends Component
      * @param array<string, mixed> $object
      */
     #[On('order::item::updated')]
-    public function update(array $items): void
+    public function update(array $object): void
     {
-        foreach ($items as $id => $item) {
-            $this->items[$id] = $item;
-        }
-
+        unset($this->items[$object['id']]);
+        $this->items[$object['id']] = $object;
         $this->updateTotal();
     }
+
 
     #[On('order::item::deleted')]
     public function delete(int $key): void

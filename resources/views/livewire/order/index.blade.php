@@ -23,6 +23,11 @@
 
                 @scope('actions', $order)
                     <div class="flex items-center space-x-2">
+                        <x-button id="print-btn-{{ $order->id }}" wire:key="print-btn-{{ $order->id }}"
+                            icon="o-printer" link="{{ route('orders.print', $order->id) }}" external
+                            class="btn-ghost btn-sm" 
+                        />
+
                         <x-button id="show-btn-{{ $order->id }}" 
                             wire:key="show-btn-{{ $order->id }}" 
                             icon="o-eye"
@@ -48,9 +53,6 @@
                     </div>
                 @endscope
             </x-table>
-
-            <livewire:order.create />
-            <livewire:order.edit />
             <livewire:order.delete />
         @else
             <x-alert title="Nenhuma ordem encontrada!" icon="o-exclamation-triangle" shadow />

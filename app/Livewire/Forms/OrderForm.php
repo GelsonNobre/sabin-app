@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -18,14 +19,16 @@ class OrderForm extends Form
 
     public ?int $order_status_id = null;
 
-    public ?string $open_date = null;
+    public ?string $doctor = null;
 
-    public ?float $total = null;
+    public ?string $CRM = null;
+
+    public ?string $open_date = null;
 
     public ?string $notes = null;
 
     #[Validate('required', as: 'medicações')]
-    public array $medications = [];
+    public array $items = [];
 
 
     public function setObject(Order $object): void
@@ -36,7 +39,6 @@ class OrderForm extends Form
         $this->nurse_id             = $object->nurse_id;
         $this->order_status_id      = $object->order_status_id;
         $this->open_date            = $object->open_date;
-        $this->total                = $object->total;
         $this->notes                = $object->notes;
 
 
@@ -47,56 +49,50 @@ class OrderForm extends Form
                 'quantity'  => $medication->pivot->quantity,
                 'price'     => $medication->pivot->price,
                 'total'     => strval((float)$medication->pivot->quantity * (float)$medication->pivot->price),
-            ];  
+            ];
 
-            $this->medications[$medication->id] = $item;
+            $this->items[$medication->id] = $item;
         }
     }
 
     public function store(): void
     {
         $this->validate();
-        
+
+
         if (empty($this->object->id)) {
             $this->object = Order::query()->create([
-                'user_id'              => $this->user_id,
+                'user_id'              => Auth::id(),
                 'patient_id'           => $this->patient_id,
                 'nurse_id'             => $this->nurse_id,
                 'order_status_id'      => $this->order_status_id,
                 'open_date'            => $this->open_date,
-                'total'                => $this->total,
+                'doctor'               => $this->doctor,
+                'CRM'                  => $this->CRM,
                 'notes'                => $this->notes,
             ]);
         } else {
             $this->object->update([
-                'user_id'              => $this->user_id,
+                'user_id'              => Auth::id(),
                 'patient_id'           => $this->patient_id,
                 'nurse_id'             => $this->nurse_id,
                 'order_status_id'      => $this->order_status_id,
                 'open_date'            => $this->open_date,
-                'total'                => $this->total,
+                'doctor'               => $this->doctor,
+                'CRM'                  => $this->CRM,
                 'notes'                => $this->notes,
             ]);
         }
 
-        $medications = [];
+        $items = [];
 
-        foreach ($this->medications as $medication) {
-            $medications[$medication['id']] = [
-                'quantity'  => $medication['quantity'],
-                'price'     => $medication['price'],
+        foreach ($this->items as $item) {
+            $items[$item['id']] = [
+                'quantity'  => $item['quantity'],
+                'price'     => $item['price'],
             ];
         }
 
-        $this->object->medications()->sync($medications);
-
-
+        $this->object->medications()->sync($items);
     }
-            
 }
-    
-
-
-
-
-

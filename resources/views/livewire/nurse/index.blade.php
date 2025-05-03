@@ -52,5 +52,6 @@
             <livewire:nurse.create />
             <livewire:nurse.edit />
             <livewire:nurse.delete />
+            <livewire:nurse.show />
         </x-card>
 </div>
