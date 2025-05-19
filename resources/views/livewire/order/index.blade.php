@@ -23,8 +23,18 @@
 
                 @scope('actions', $order)
                     <div class="flex items-center space-x-2">
-                        <x-button id="print-btn-{{ $order->id }}" wire:key="print-btn-{{ $order->id }}"
-                            icon="o-printer" link="{{ route('orders.print', $order->id) }}" external
+                        <x-button id="pay-btn-{{ $order->id }}" 
+                            wire:key="pay-btn-{{ $order->id }}"
+                            icon="o-banknotes" 
+                            link:="{{ route('orders.payment', $order->id) }}"
+                            spinner
+                            class="btn-ghost btn-sm" 
+                        />
+
+                        <x-button id="print-btn-{{ $order->id }}" 
+                            wire:key="print-btn-{{ $order->id }}"
+                            icon="o-printer" 
+                            link="{{ route('orders.print', $order->id) }}" external
                             class="btn-ghost btn-sm" 
                         />
 
@@ -53,9 +63,9 @@
                     </div>
                 @endscope
             </x-table>
-            <livewire:order.delete />
-        @else
+            @else
             <x-alert title="Nenhuma ordem encontrada!" icon="o-exclamation-triangle" shadow />
-        @endif
+            @endif
+            <livewire:order.delete />
     </x-card>
 </div>

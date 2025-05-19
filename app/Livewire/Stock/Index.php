@@ -52,6 +52,7 @@ class Index extends Component
             ['key' => 'id', 'label' => '#'],
             ['key' => 'medication_name', 'label' => 'Nome'],
             ['key' => 'medication_producer', 'label' => 'Fabricante'],
+            ['key' => 'batch', 'label' => 'Lote'],
             ['key' => 'quantity', 'label' => 'Quantidade'],
             ['key' => 'type', 'label' => 'Tipo'],
         ];

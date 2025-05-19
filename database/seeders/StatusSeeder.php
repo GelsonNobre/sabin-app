@@ -17,6 +17,7 @@ class StatusSeeder extends Seeder
         OrderStatus::query()->delete();
 
         $statuses = [
+            'Selecione',
             'Em Preparação',
             'Aguardando Pagamento',
             'Pagamento Confirmado',

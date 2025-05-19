@@ -150,10 +150,10 @@
                 </td>
                 <td width="2%"></td>
                 <td width="40%">
-                    {{-- <h1>{{ $companyName }}</h1>
-                    <p>{{ $companyEmail }}</p>
-                    <p>{{ $companyPhone }}</p>
-                    <p>{{ $companyAddress }}</p> --}}
+                    <h1>Clínica Barezzi</h1>
+                    <p>contato@barezzi.com.br</p>
+                    <p>61 3999-9898</p>
+                    <p>Av. Principal, 123 Brasília-DF</p> 
                 </td>
                 <td width="2%"></td>
                 <td width="36%" style="text-align: right;">
@@ -252,7 +252,7 @@
                 <section style="margin-top: 100px">
                     <div style="border-top: 1px solid #000000; padding-top: 10px; width: 300px; margin: auto">
                         <p style="text-align: center">
-                            {{ $order->nurse->name ?? 'Sem enfermeiro(a)' }}  
+                            {{ 'Enfermeiro(a): '. $order->nurse->name ?? 'Sem enfermeiro(a)' }}  
                         </p>
                     </div>
                 </section>

@@ -59,6 +59,21 @@ class OrderForm extends Form
     {
         $this->validate();
 
+        // ✅ Etapa 1: verifica estoque de todos os medicamentos ANTES de salvar
+        foreach ($this->items as $item) {
+            $medication = \App\Models\Medication::find($item['id']);
+
+            if (! $medication) {
+                throw new \Exception("Medicação ID {$item['id']} não encontrada.");
+            }
+
+            $estoqueDisponivel = $medication->stock ?? 0;
+
+            if ($estoqueDisponivel < $item['quantity']) {
+                throw new \Exception("Estoque insuficiente para o medicamento \"{$medication->name}\". Quantidade solicitada: {$item['quantity']}. Estoque disponível: $estoqueDisponivel.");
+            }
+        }
+
 
         if (empty($this->object->id)) {
             $this->object = Order::query()->create([
@@ -94,5 +109,8 @@ class OrderForm extends Form
         }
 
         $this->object->medications()->sync($items);
+
+        // ✅ Etapa 3: agora sim deduz o estoque (com segurança pois já validamos antes)
+        $this->object->finalizeOrder();
     }
 }

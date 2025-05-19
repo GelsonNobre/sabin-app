@@ -46,6 +46,9 @@ class PermissionSeeder extends Seeder
 
             ['id' => 20, 'module_id' => 11, 'name' => 'Ver', 'guard' => 'read_nurses'],
             ['id' => 21, 'module_id' => 11, 'name' => 'Criar/Editar', 'guard' => 'write_nurses'],
+
+            ['id' => 22, 'module_id' => 12, 'name' => 'Ver', 'guard' => 'read_status'],
+            ['id' => 23, 'module_id' => 12, 'name' => 'Criar/Editar', 'guard' => 'write_status'],
         ]);
 
         //Role 2 - Administrador
@@ -102,6 +105,8 @@ class PermissionSeeder extends Seeder
             ['permission_id' => 15, 'role_id' => 5,], // Entrega de 14/04/2025
             ['permission_id' => 20, 'role_id' => 5,], // Entrega de 14/04/2025
             ['permission_id' => 21, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 22, 'role_id' => 5,], // Entrega de 14/04/2025
+            ['permission_id' => 23, 'role_id' => 5,], // Entrega de 14/04/2025
         ]);
     }
 }

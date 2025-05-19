@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Livewire\Order\Payment;
 
 class Index extends Component
 {

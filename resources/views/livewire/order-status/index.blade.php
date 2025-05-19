@@ -1,6 +1,6 @@
 <div>
     <!-- HEADER -->
-    <x-header title="Status" separator progress-indicator>
+    <x-header title="Status de Ordens de Serviço" separator progress-indicator>
         <x-slot:middle class="!justify-end">
             <div class="inline-flex items-center gap-4">
                 <x-input placeholder="Pesquisar..." wire:model.live.debounce="search" icon="o-magnifying-glass"

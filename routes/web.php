@@ -51,4 +51,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/orders/{id}/edit', \App\Livewire\Order\Edit::class)->name('orders.edit');
     Route::get('/orders/{id}', \App\Livewire\Order\Show::class)->name('orders.show');
     Route::get('/orders/{order}/print', PrintOrderController::class)->name('orders.print');
+    Route::get('/orders/payment/{id}', \App\Livewire\Order\Payment::class)->name('orders.payment');
 });

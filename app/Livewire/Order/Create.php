@@ -15,6 +15,7 @@ use Livewire\Component;
 use Mary\Traits\Toast;
 use App\Models\Nurse;
 use App\Models\OrderStatus;
+use Illuminate\Redis\Limiters\DurationLimiter;
 
 class Create extends Component
 {
@@ -86,13 +87,16 @@ class Create extends Component
             return;
         }
 
-        $this->form->store();
-        $this->success('Nova ordem criada com sucesso!');
-        $this->redirect('/orders');
+        //$this->form->store();
+        //$this->success('Nova ordem criada com sucesso!');
+        //$this->redirect('/orders');
+
+        try {
+            $this->form->store();
+            $this->success('Nova ordem criada com sucesso!');
+            $this->redirect('/orders');
+        } catch (\Exception $e) {
+            $this->error($e->getMessage(), timeout: 10000);
+        }
     }
-
-
-
-    //Chamar a Função Quando a Ordem for Finalizada
-    //$this->finalizeOrder();
 }
