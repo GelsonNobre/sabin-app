@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
+
 
 class StockMovement extends Model
 {
@@ -29,58 +31,99 @@ class StockMovement extends Model
 
 
 
-    public static function deductStock($medicationId, $quantityNeeded)
+    public static function deductSt($medicationId, $quantityNeeded)
     {
         $remaining = $quantityNeeded;
 
-        // Busca os lotes mais antigos e NÃO vencidos primeiro
-        $batches = StockMovement::where('medication_id', $medicationId)
+        $batches = self::where('medication_id', $medicationId)
             ->where('type', 'entrada')
             ->where('quantity', '>', 0)
-            ->where('expirate_date', '>=', now()) // Apenas lotes não vencidos
-            ->orderBy('expirate_date', 'asc') // Prioriza os mais próximos de vencer
-            ->orderBy('created_at', 'asc') // FIFO: Primeiro a Entrar, Primeiro a Sair
+            ->where('expirate_date', '>=', now())
+            ->orderBy('expirate_date', 'asc')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         foreach ($batches as $batch) {
             if ($remaining <= 0) break;
 
-            // Se o lote tem estoque suficiente, faz a retirada total
-            if ($batch->quantity >= $remaining) {
-                $batch->quantity -= $remaining;
-                $batch->save();
+            $retirada = min($remaining, $batch->quantity);
 
-                // Criamos um registro de saída para esse lote
-                StockMovement::create([
-                    'medication_id' => $medicationId,
-                    'batch' => $batch->batch,
-                    'shot' => $batch->shot,
-                    'expirate_date' => $batch->expirate_date,
-                    'quantity' => $remaining,
-                    'type' => 'saída',
-                ]);
+            // Atualiza a quantidade do lote
+            $batch->quantity -= $retirada;
+            $batch->save();
 
-                $remaining = 0;
-            } else {
-                // Se o lote não for suficiente, consome tudo dele e passa para o próximo
-                $remaining -= $batch->quantity;
+            // Cria o registro de saída
+            self::create([
+                'medication_id' => $medicationId,
+                'user_id'       => Auth::id(),
+                'batch'         => $batch->batch,
+                'shot'          => $batch->shot ?? null, // mantém se estiver usando esse campo
+                'expirate_date' => $batch->expirate_date,
+                'quantity'      => $retirada,
+                'type'          => 'saida',
+            ]);
 
-                StockMovement::create([
-                    'medication_id' => $medicationId,
-                    'batch' => $batch->batch,
-                    'shot' => $batch->shot,
-                    'expirate_date' => $batch->expirate_date,
-                    'quantity' => $batch->quantity,
-                    'type' => 'saída',
-                ]);
-
-                $batch->quantity = 0;
-                $batch->save();
-            }
+            $remaining -= $retirada;
         }
 
         if ($remaining > 0) {
-            throw new \Exception("Estoque insuficiente para o medicamento ID: $medicationId");
+            $med = \App\Models\Medication::find($medicationId);
+            $estoqueAtual = (int) $med->stock ?? 0;
+
+            throw new \Exception(
+                "Estoque insuficiente para o medicamento \"{$med->name}\". " .
+                    "Quantidade solicitada: $quantityNeeded. Estoque disponível: $estoqueAtual."
+            );
+        }
+    }
+
+    public static function deductStock($medicationId, $quantityNeeded)
+    {
+        $remaining = $quantityNeeded;
+
+        $batches = self::where('medication_id', $medicationId)
+            ->where('type', 'entrada')
+            ->where('expirate_date', '>=', now())
+            ->orderBy('expirate_date', 'asc')
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        foreach ($batches as $batch) {
+            if ($remaining <= 0) break;
+
+            // calcula quanto pode retirar desse lote
+            $saidasDesseLote = self::where('type', 'saida')
+                ->where('medication_id', $medicationId)
+                ->where('batch', $batch->batch)
+                ->sum('quantity');
+
+            $disponivelNoLote = $batch->quantity - $saidasDesseLote;
+
+            if ($disponivelNoLote <= 0) continue;
+
+            $retirada = min($remaining, $disponivelNoLote);
+
+            self::create([
+                'medication_id' => $medicationId,
+                'user_id'       => Auth::id(),
+                'batch'         => $batch->batch,
+                'shot'          => $batch->shot ?? null,
+                'expirate_date' => $batch->expirate_date,
+                'quantity'      => $retirada,
+                'type'          => 'saida',
+            ]);
+
+            $remaining -= $retirada;
+        }
+
+        if ($remaining > 0) {
+            $med = \App\Models\Medication::find($medicationId);
+            $estoqueAtual = (int) $med->stock ?? 0;
+
+            throw new \Exception(
+                "Estoque insuficiente para o medicamento \"{$med->name}\". " .
+                    "Quantidade solicitada: $quantityNeeded. Estoque disponível: $estoqueAtual."
+            );
         }
     }
 }

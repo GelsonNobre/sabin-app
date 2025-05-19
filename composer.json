@@ -14,6 +14,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
+        "mercadopago/dx-php": "^3.3",
         "robsontenorio/mary": "^1.30"
     },
     "require-dev": {

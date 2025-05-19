@@ -85,6 +85,9 @@
                     @can('read_roles')
                         <x-menu-item title="Perfis" icon="o-user-group" link="/roles" />
                     @endcan
+                    @can('read_status')
+                        <x-menu-item title="Status de Ordens" icon="o-sparkles" link="/order-status" />
+                    @endcan
                 </x-menu-sub>
             </x-menu>
         </x-slot:sidebar>

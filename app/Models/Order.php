@@ -56,9 +56,19 @@ class Order extends Model
     public function finalizeOrder()
     {
         foreach ($this->medications as $medication) {
-            $this->deductStock($medication->id, $medication->pivot->quantity);
+            StockMovement::deductStock(
+                $medication->id,
+                $medication->pivot->quantity
+            );
         }
 
-        $this->update(['status' => 'finalizada']);
+        // Define status "Aguardando Pagamento"
+        $status = \App\Models\OrderStatus::where('name', 'Aguardando Pagamento')->first();
+
+        if (! $status) {
+            throw new \Exception('Status "Aguardando Pagamento" não encontrado.');
+        }
+
+        $this->update(['order_status_id' => $status->id]);
     }
 }

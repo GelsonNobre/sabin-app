@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->date('expirate_date');
             $table->string('batch');
-            $table->enum('type', ['entrada', 'saída']);
+            $table->enum('type', ['entrada', 'saida']);
             $table->timestamps();
         });
     }

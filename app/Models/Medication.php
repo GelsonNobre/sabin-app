@@ -26,6 +26,15 @@ class Medication extends Model
         return $this->stockMovements()->sum('quantity');
     }
 
+    public function getStockAttribute()
+    {
+        $entradas = $this->stockMovements()->where('type', 'entrada')->sum('quantity');
+        $saidas = $this->stockMovements()->where('type', 'saida')->sum('quantity');
+
+        return $entradas - $saidas;
+    }
+
+
     //Função para retornar o nome do tipo de idade no componente Show
     public function getAgeTypeNameAttribute(): string
     {
