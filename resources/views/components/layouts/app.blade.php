@@ -69,6 +69,9 @@
                 @can('read_dashboard')
                     <x-menu-item title="Hello" icon="o-sparkles" link="/" />
                 @endcan
+                @can('read_orders')
+                    <x-menu-item title="Ordens de Serviço" icon="o-sparkles" link="/orders" />
+                @endcan
                 @can('read_patients')
                     <x-menu-item title="Pacientes" icon="o-sparkles" link="/patients" />
                 @endcan
@@ -77,6 +80,9 @@
                 @endcan
                 @can('read_medications')
                     <x-menu-item title="Medicamentos" icon="o-sparkles" link="/medications" />
+                @endcan
+                @can('read_stocks')
+                    <x-menu-item title="Estoque de Medicamentos" icon="o-sparkles" link="/stock" />
                 @endcan
                 @can('read_users')
                     <x-menu-item title="Usuários" icon="o-users" link="/users" />
