@@ -33,8 +33,10 @@
             <x-form.row cols="3">
                 <x-input 
                     label="Data do Atendimento" 
-                    :value="$object->open_date?->format('d/m/Y H:i')" 
-                    readonly />
+                    :value="$object->open_date ? \Carbon\Carbon::parse($object->open_date)->format('d/m/Y H:i') : ''" 
+                    readonly 
+                />
+
 
                 <x-input 
                     label="Médico Responsável" 

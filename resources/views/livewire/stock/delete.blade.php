@@ -4,7 +4,7 @@
             <x-modal wire:model="modal" :title="'Confirmação de Exclusão'" subtitle="Tem certeza que deseja excluir esse item do estoque?" separator >
                 <x-form >
                     <div class="space-y-2">
-                        <x-input readonly label="Nome" :value="$stock->name"/>
+                        <x-input readonly label="Nome" :value="$stock->medication->name"/>
                     </div>
                     <x-slot:actions>
                         <x-button label="Cancelar" @click="$wire.modal = false"/>

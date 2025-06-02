@@ -17,12 +17,11 @@ class StatusSeeder extends Seeder
         OrderStatus::query()->delete();
 
         $statuses = [
-            'Selecione',
-            'Em Preparação',
-            'Aguardando Pagamento',
-            'Pagamento Confirmado',
-            'Estornado',
-            'Cancelada',
+            '1 - Em Preparação',
+            '2 - Aguardando Pagamento',
+            '3 - Pagamento Confirmado',
+            '4 - Cancelada',
+            '5 - Concluida',
         ];
 
         foreach ($statuses as $status) {

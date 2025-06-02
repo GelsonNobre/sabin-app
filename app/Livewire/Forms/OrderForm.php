@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Order;
+use App\Models\OrderStatus;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
@@ -38,6 +39,8 @@ class OrderForm extends Form
         $this->patient_id           = $object->patient_id;
         $this->nurse_id             = $object->nurse_id;
         $this->order_status_id      = $object->order_status_id;
+        $this->doctor               = $object->doctor;
+        $this->CRM                  = $object->CRM;
         $this->open_date            = $object->open_date;
         $this->notes                = $object->notes;
 
@@ -80,7 +83,7 @@ class OrderForm extends Form
                 'user_id'              => Auth::id(),
                 'patient_id'           => $this->patient_id,
                 'nurse_id'             => $this->nurse_id,
-                'order_status_id'      => $this->order_status_id,
+                'order_status_id'      => 2,
                 'open_date'            => $this->open_date,
                 'doctor'               => $this->doctor,
                 'CRM'                  => $this->CRM,
@@ -98,7 +101,7 @@ class OrderForm extends Form
                 'notes'                => $this->notes,
             ]);
         }
-
+        // ✅ Etapa 3: sincroniza os medicamentos
         $items = [];
 
         foreach ($this->items as $item) {
@@ -110,7 +113,14 @@ class OrderForm extends Form
 
         $this->object->medications()->sync($items);
 
-        // ✅ Etapa 3: agora sim deduz o estoque (com segurança pois já validamos antes)
-        $this->object->finalizeOrder();
+        // ✅ Etapa 4: se status for "Concluída" e ainda não deduzido, deduz agora
+        if (
+            $this->order_status_id === OrderStatus::CONCLUIDA_ID && // ID real da status "Concluida"
+            ! $this->object->stock_deducted
+        ) {
+            $this->object->finalizeOrder(); // chama o deductStock()
+            $this->object->stock_deducted = true;
+            $this->object->save();
+        }
     }
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('doctor');
             $table->string('CRM');
             $table->text('notes')->nullable();
+            $table->boolean('stock_deducted')->default(false);
             $table->timestamps();
         });
 

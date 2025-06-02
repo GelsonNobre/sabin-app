@@ -22,9 +22,9 @@ class Order extends Model
         'notes',
     ];
 
-    protected $casts = [
-        'open_date' => 'date',
-    ];
+    //protected $casts = [
+    //    'open_date' => 'date',
+    // ];
 
     public function patient()
     {
@@ -63,12 +63,19 @@ class Order extends Model
         }
 
         // Define status "Aguardando Pagamento"
-        $status = \App\Models\OrderStatus::where('name', 'Aguardando Pagamento')->first();
+        $status = \App\Models\OrderStatus::where('name', '2 - Aguardando Pagamento')->first();
 
         if (! $status) {
-            throw new \Exception('Status "Aguardando Pagamento" não encontrado.');
+            throw new \Exception('Status "2 - Aguardando Pagamento" não encontrado.');
         }
 
         $this->update(['order_status_id' => $status->id]);
+    }
+
+    public function getTotalPriceAttribute(): float
+    {
+        return $this->medications->sum(function ($med) {
+            return $med->pivot->price * $med->pivot->quantity;
+        });
     }
 }

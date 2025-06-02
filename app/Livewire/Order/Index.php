@@ -41,13 +41,35 @@ class Index extends Component
         return [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'patient.name', 'label' => 'Paciente'],
-            ['key' => 'doctor', 'label' => 'Medico'],
-            ['key' => 'orderStatus.name', 'label' => 'Status'],
             ['key' => 'nurse.name', 'label' => 'Enfermeiro'],
+            ['key' => 'orderStatus.name', 'label' => 'Status'],
+            ['key' => 'total_price', 'label' => 'Preço'],
 
         ];
     }
 
+    public function statusBadgeColor(string $status): string
+    {
+        $status = strtolower($status);
+
+        if (str_contains($status, 'aguardando')) {
+            return 'badge-warning';
+        }
+
+        if (str_contains($status, 'confirmado')) {
+            return 'badge-primary';
+        }
+
+        if (str_contains($status, 'cancelada')) {
+            return 'badge-secondary';
+        }
+
+        if (str_contains($status, 'concluida')) {
+            return 'badge-success';
+        }
+
+        return 'badge-neutral badge-soft';
+    }
 
     public function delete(int $id): void
     {

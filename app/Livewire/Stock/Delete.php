@@ -9,6 +9,7 @@ use Livewire\Component;
 use Mary\Traits\Toast;
 use Illuminate\Contracts\View\{Factory, View};
 use Illuminate\Foundation\Application;
+
 class Delete extends Component
 {
 
@@ -33,10 +34,10 @@ class Delete extends Component
     {
         $this->authorize('write_stocks');
 
-        $this->medication->delete();
+        $this->stock->delete();
         $this->success('Item do estoque excluido com sucesso!');
         $this->dispatch('stock::deleted');
         $this->reset();
-        $this->redirect('/stocks');
+        $this->redirect('/stock');
     }
 }
