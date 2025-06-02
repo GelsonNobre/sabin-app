@@ -5,6 +5,7 @@ namespace App\Livewire\Order;
 use App\Models\Order;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class Payment extends Component
 {
@@ -13,11 +14,17 @@ class Payment extends Component
     public $qr_code;
     public $status;
 
+
     public function mount(Order $order)
     {
         $this->order = $order;
 
-        $response = Http::withToken(config('services.mercadopago.token'))
+        $idempotencyKey = (string) Str::uuid(); // Gera uma chave única
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . config('services.mercadopago.token'),
+            'X-Idempotency-Key' => $idempotencyKey,
+        ])
             ->post('https://api.mercadopago.com/v1/payments', [
                 'transaction_amount' => (float) $order->medications->sum(fn($m) => $m->pivot->price * $m->pivot->quantity),
                 'description' => 'Pagamento da ordem #' . $order->id,
@@ -29,6 +36,10 @@ class Payment extends Component
                 ],
             ]);
 
+        if (! $response->successful()) {
+            dd('Erro na API Mercado Pago:', $response->body());
+        }
+
         $data = $response->json();
 
         $this->qr_code_base64 = $data['point_of_interaction']['transaction_data']['qr_code_base64'];
@@ -36,8 +47,22 @@ class Payment extends Component
         $this->status = $data['status'];
     }
 
+
+
+    //public function render()
+    //{
+    //   return view('livewire.order.payment');
+    //}
+
+    public function layout(): string
+    {
+        return 'layouts.app';
+    }
+
     public function render()
     {
-        return view('livewire.order.payment');
+        return view('livewire.order.payment', [
+            'title' => 'Pagamento da Ordem #' . $this->order->id,
+        ]);
     }
 }

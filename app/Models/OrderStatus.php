@@ -10,10 +10,11 @@ class OrderStatus extends Model
     protected $fillable = [
         'name',
     ];
-    
+
+    public const CONCLUIDA_ID = 5;
+
     public function orders(): HasMany
     {
-        return $this->hasmany(OrderStatus::class);
+        return $this->hasMany(Order::class);
     }
 }
-

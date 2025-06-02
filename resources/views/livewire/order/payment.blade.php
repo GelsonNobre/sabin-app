@@ -1,38 +1,61 @@
-{{--<div>
-    @if($modal)
+<x-card class="max-w-md mx-auto text-center">
+    <h2 class="text-lg font-semibold mb-4">Escolha como deseja pagar</h2>
 
-        <x-modal wire:model="modal" :title="'Pagamento via Pix'" separator>
-            <x-form wire:submit.prevent="submit">
-                @if($qr_code_base64)
-                    <div class="text-center space-y-4">
-                        <img class="mx-auto" src="data:image/png;base64,{{ $qr_code_base64 }}" alt="QR Code Pix">
-                        <x-input label="Código copia e cola" readonly :value="$qr_code" />
-                    </div>
-                @endif
-                <x-slot:actions>
-                    <x-button label="Salvar" class="btn-primary" type="submit" spinner="save" />
-                    <x-button label="Cancelar" @click="$wire.modal = false"/>
-                </x-slot:actions>
-            </x-form>
-        </x-modal>
+    {{-- Container que será preenchido pelo Mercado Pago --}}
+    <div id="paymentBrick_container" class="mt-6"></div>
 
-    @endif
-</div>--}}
-<div>
+    {{-- Script do Mercado Pago --}}
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 
-<x-layouts.app title="Pagamento da Ordem #{{ $order->id }}">
-    <x-card class="max-w-md mx-auto text-center">
-        <h2 class="text-lg font-semibold mb-4">Escaneie para pagar com Pix</h2>
+    <script>
+        const mp = new MercadoPago("{{ config('services.mercadopago.public_key') }}"); // Coloque sua chave pública aqui ou no .env
+        const bricksBuilder = mp.bricks();
 
-        <img src="data:image/png;base64,{{ $qr_code_base64 }}" class="mx-auto w-64" alt="QR Code Pix">
+        async function renderPaymentBrick(preferenceId) {
+            const settings = {
+                initialization: {
+                    amount: {{ $order->total ?? 100 }}, // valor total da ordem
+                    preferenceId: preferenceId,
+                },
+                callbacks: {
+                    onReady: () => {
+                        console.log("Brick pronto");
+                    },
+                    onSubmit: ({ selectedPaymentMethod, formData }) => {
+                        return new Promise((resolve, reject) => {
+                            fetch('/process_payment', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(formData),
+                            })
+                            .then(res => res.json())
+                            .then(data => resolve())
+                            .catch(err => reject());
+                        });
+                    },
+                    onError: (error) => {
+                        console.error(error);
+                    }
+                },
+            };
 
-        <x-input label="Código Pix (copia e cola)" :value="$qr_code" readonly class="mt-4" />
+            window.paymentBrickController = await bricksBuilder.create(
+                'payment',
+                'paymentBrick_container',
+                settings
+            );
+        }
 
-        <x-badge class="mt-2" color="primary">
-            Status: {{ ucfirst($status) }}
-        </x-badge>
-    </x-card>
-</x-layouts.app>
+        fetch('/create-preference/{{ $order->id }}')
+            .then(res => res.json())
+            .then(data => renderPaymentBrick(data.preference_id));
+    </script>
+</x-card>
 
-</div>
+
+
+
 
