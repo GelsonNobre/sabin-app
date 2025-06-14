@@ -39,10 +39,10 @@
                             id="pay-btn-{{ $order->id }}" 
                             wire:key="pay-btn-{{ $order->id }}"
                             icon="o-banknotes" 
-                            link="{{ $order->order_status_id !== \App\Models\OrderStatus::CONCLUIDA_ID ? route('orders.payment', $order->id) : '#' }}"
-                            class="btn-ghost btn-sm {{ $order->order_status_id === \App\Models\OrderStatus::CONCLUIDA_ID ? 'opacity-50 pointer-events-none cursor-not-allowed' : '' }}" 
-                            spinner
+                            link="{{ route('orders.payment', $order->id) }}"
+                            class="btn-ghost btn-sm" 
                         />
+
 
 
                         <x-button id="print-btn-{{ $order->id }}" 

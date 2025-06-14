@@ -14,23 +14,23 @@ class PatientSeeder extends Seeder
 
         $names = [
             // Airplane!
-            'Ted Striker',
+            'Anônio de Sousa',
             'Elaine Dickinson',
-            'Dr. Rumack',
-            'Captain Clarence Oveur',
-            'Roger Murdock',
-            'Rex Kramer',
-            'Johnny',
+            'Diego Barbosa',
+            'Clara Alves',
+            'Roger Mauricio',
+            'Rinaldo de Souza',
+            'Tatiana de Souza',
 
             // Auto da Compadecida
             'João Grilo',
-            'Chicó',
-            'Padre João',
-            'Bispo',
-            'Cangaceiro Severino',
-            'Mulher do padeiro',
-            'Padeiro',
-            'Dorinha',
+            'Francisco Santos',
+            'João Almeida',
+            'Beatriz Almeida',
+            'Joaquim Severino',
+            'Mariana Ximenes',
+            'Pablo Silva',
+            'Dorival dos Santos',
         ];
 
         foreach ($names as $name) {

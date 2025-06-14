@@ -27,9 +27,15 @@
 
         <x-card title="Informações Clínicas" separator>
             <x-form.row cols="3">
-                <x-datetime 
+                {{--<x-datetime 
                     label="Data do Atendimento" 
-                    wire:model="form.open_date" />
+                    wire:model="form.open_date" readonly/>--}}
+
+                <x-input 
+                    label="Data do Atendimento" 
+                    :value="$object->open_date ? \Carbon\Carbon::parse($object->open_date)->format('d/m/Y H:i') : ''" 
+                    readonly 
+                />
 
                 <x-input 
                     label="Médico Responsável" 

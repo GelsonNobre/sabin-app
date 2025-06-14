@@ -48,7 +48,7 @@ class Edit extends Component
 
         $this->form->store();
 
-        $this->success('Usuário atualizado com sucesso!');
+        $this->success('Perfil atualizado com sucesso!');
         $this->dispatch('role::updated');
         $this->resetExcept('form');
     }

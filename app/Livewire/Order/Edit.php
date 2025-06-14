@@ -21,6 +21,7 @@ class Edit extends Component
 
     public bool $showAuthorizationModal = false;
 
+    public ?Order $object = null;
 
     /** @var EloquentCollection<int, Person> */
     public ?EloquentCollection $patientsSearchable = null;
@@ -39,7 +40,7 @@ class Edit extends Component
     public function mount(int $id): void
     {
         $order = Order::find($id);
-
+        $this->object = Order::with('medications')->findOrFail($id);
         $this->form->setObject($order);
 
         $this->patients();

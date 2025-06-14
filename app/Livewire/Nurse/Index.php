@@ -3,6 +3,7 @@
 namespace App\Livewire\Nurse;
 
 use App\Models\Nurse;
+use App\Traits\HandlesAuthorizationFeedback;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,6 +16,9 @@ class Index extends Component
 {
     use WithPagination;
 
+    use HandlesAuthorizationFeedback;
+    public bool $showAuthorizationModal = false;
+
     public ?string $search = null;
 
     /** @var array|string[] */
@@ -25,6 +29,13 @@ class Index extends Component
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.nurse.index');
+    }
+
+    public function mount(): void
+    {
+        if (!$this->authorizeWithMessage('read_nurses')) {
+            return;
+        }
     }
 
     /**
@@ -57,7 +68,7 @@ class Index extends Component
     }
 
 
-    public function create (): void
+    public function create(): void
     {
         $this->dispatch('nurse::create');
     }

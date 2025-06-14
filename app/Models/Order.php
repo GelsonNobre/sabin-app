@@ -22,9 +22,9 @@ class Order extends Model
         'notes',
     ];
 
-    //protected $casts = [
-    //    'open_date' => 'date',
-    // ];
+    protected $casts = [
+        'open_date' => 'date',
+    ];
 
     public function patient()
     {
@@ -77,5 +77,11 @@ class Order extends Model
         return $this->medications->sum(function ($med) {
             return $med->pivot->price * $med->pivot->quantity;
         });
+    }
+
+    public function getPdfData(): self
+    {
+        return self::with(['patient', 'nurse', 'medications'])
+            ->findOrFail($this->id);
     }
 }
