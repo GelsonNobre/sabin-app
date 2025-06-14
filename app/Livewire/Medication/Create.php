@@ -30,8 +30,12 @@ class Create extends Component
 
     public function mount(): void
     {
+
         $this->indicationTypes = $this->indicationTypes();
         $this->aplicationTypes = $this->aplicationTypes();
+        if (!$this->authorizeWithMessage('write_medications')) {
+            return;
+        }
     }
 
     public function indicationTypes()

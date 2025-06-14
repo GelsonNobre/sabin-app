@@ -3,6 +3,7 @@
 namespace App\Livewire\Medication;
 
 use App\Models\Medication;
+use App\Traits\HandlesAuthorizationFeedback;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,6 +15,9 @@ use Livewire\Attributes\Computed;
 class Index extends Component
 {
     use WithPagination;
+
+    use HandlesAuthorizationFeedback;
+    public bool $showAuthorizationModal = false;
 
     public ?string $search = null;
 
@@ -27,6 +31,12 @@ class Index extends Component
         return view('livewire.medication.index');
     }
 
+    public function mount(): void
+    {
+        if (!$this->authorizeWithMessage('read_medications')) {
+            return;
+        }
+    }
     /**
      * @return LengthAwarePaginator<Medication>
      */
@@ -56,7 +66,7 @@ class Index extends Component
             ['key' => 'name', 'label' => 'Nome'],
             ['key' => 'producer', 'label' => 'Fabricante'],
             ['key' => 'age_type', 'label' => 'Faixa etária'],
-            ['key' => 'stock_quantity', 'label' => 'Aqui é pra ser Estoque'],
+            ['key' => 'stock_quantity', 'label' => 'Quantidade em Estoque'],
         ];
     }
 

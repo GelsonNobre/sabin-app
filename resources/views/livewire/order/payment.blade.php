@@ -1,61 +1,13 @@
+
 <x-card class="max-w-md mx-auto text-center">
-    <h2 class="text-lg font-semibold mb-4">Escolha como deseja pagar</h2>
+    <h2 class="text-lg font-semibold mb-4">Escaneie para visualizar o valor</h2>
 
-    {{-- Container que será preenchido pelo Mercado Pago --}}
-    <div id="paymentBrick_container" class="mt-6"></div>
+    <img src="data:image/png;base64,{{ $qr_code_base64 }}" class="mx-auto w-64" alt="QR Code">
 
-    {{-- Script do Mercado Pago --}}
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <x-badge class="mt-2" color="primary">
+        Status: {{ ucfirst($status) }}
+    </x-badge>
 
-    <script>
-        const mp = new MercadoPago("{{ config('services.mercadopago.public_key') }}"); // Coloque sua chave pública aqui ou no .env
-        const bricksBuilder = mp.bricks();
-
-        async function renderPaymentBrick(preferenceId) {
-            const settings = {
-                initialization: {
-                    amount: {{ $order->total ?? 100 }}, // valor total da ordem
-                    preferenceId: preferenceId,
-                },
-                callbacks: {
-                    onReady: () => {
-                        console.log("Brick pronto");
-                    },
-                    onSubmit: ({ selectedPaymentMethod, formData }) => {
-                        return new Promise((resolve, reject) => {
-                            fetch('/process_payment', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify(formData),
-                            })
-                            .then(res => res.json())
-                            .then(data => resolve())
-                            .catch(err => reject());
-                        });
-                    },
-                    onError: (error) => {
-                        console.error(error);
-                    }
-                },
-            };
-
-            window.paymentBrickController = await bricksBuilder.create(
-                'payment',
-                'paymentBrick_container',
-                settings
-            );
-        }
-
-        fetch('/create-preference/{{ $order->id }}')
-            .then(res => res.json())
-            .then(data => renderPaymentBrick(data.preference_id));
-    </script>
+    <x-button wire:click="confirmarPagamento" label="Confirmar Pagamento" class="mt-4" color="success" />
 </x-card>
-
-
-
-
 

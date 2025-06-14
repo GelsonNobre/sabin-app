@@ -41,7 +41,7 @@ class OrderForm extends Form
         $this->order_status_id      = $object->order_status_id;
         $this->doctor               = $object->doctor;
         $this->CRM                  = $object->CRM;
-        $this->open_date            = $object->open_date;
+        $this->open_date            = optional($object->open_date)->format('Y/m/d H:i');
         $this->notes                = $object->notes;
 
 

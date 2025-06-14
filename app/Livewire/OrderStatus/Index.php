@@ -3,6 +3,7 @@
 namespace App\Livewire\OrderStatus;
 
 use App\Models\OrderStatus;
+use App\Traits\HandlesAuthorizationFeedback;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,6 +15,9 @@ use Livewire\Attributes\Computed;
 class Index extends Component
 {
     use WithPagination;
+
+    use HandlesAuthorizationFeedback;
+    public bool $showAuthorizationModal = false;
 
     public ?string $search = null;
 
@@ -27,6 +31,13 @@ class Index extends Component
         return view('livewire.order-status.index');
     }
 
+    public function mount(): void
+    {
+        if (!$this->authorizeWithMessage('read_order_statuses')) {
+            return;
+        }
+    }
+
     /**
      * @return LengthAwarePaginator<OrderStatus>
      */
@@ -34,7 +45,9 @@ class Index extends Component
     public function statuses(): LengthAwarePaginator
     {
         return OrderStatus::query()
-            ->when($this->search, fn($query) =>
+            ->when(
+                $this->search,
+                fn($query) =>
                 $query->where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($this->search) . '%')
             )
             ->orderBy(...array_values($this->sortBy))
@@ -71,4 +84,3 @@ class Index extends Component
         $this->dispatch('orderStatus::edit', id: $id);
     }
 }
-

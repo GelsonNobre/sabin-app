@@ -54,7 +54,4 @@ Route::middleware('auth')->group(function () {
     // Rota de pagamento com Payment Brick
     Route::get('/orders/payment/{order}', \App\Livewire\Order\Payment::class)->name('orders.payment');
 
-    // Novas rotas para integração com o Checkout Bricks
-    Route::get('/create-preference/{order}', [MercadoPagoController::class, 'createPreference'])->name('mercadopago.createPreference');
-    Route::post('/process_payment', [MercadoPagoController::class, 'processPayment'])->name('mercadopago.processPayment');
 });

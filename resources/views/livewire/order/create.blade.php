@@ -20,7 +20,7 @@
                     wire:model="form.nurse_id" single searchable
                 />
 
-                <x-select readonly label="Status da Ordem" :options="$orderStatuses" wire:model="form.order_status_id" />
+                <x-select  disabled readonly label="Status da Ordem" :options="$orderStatuses" wire:model="form.order_status_id" />
   
             </x-form.row>
         </x-card>
